@@ -1,15 +1,12 @@
 #include <stdio.h>
-#include "libft/libft.h"
 
 int main()
 {
 	char p = 'd';
 	char	*g = "hello";
-	int		s = 300000000001111;
+	long		s = 3000000000011;
 	unsigned int u = (unsigned int)(s);
 
 
-	printf("%u\n", u);
-	
-	printf("my house %jld hey", s);
+	printf("my %s and %s house %#X hey", s);
 }

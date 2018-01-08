@@ -1,3 +1,29 @@
 0 has undefined usage with string
 0 is cancelled out if - is present
 if l is present automatically become l
+
+Modifiers:
+- if star but no modifier, nothing happens
+- # only relevent for Xx and oO (hexadecimal and octal)
+- 0 gives 0 padding, but if there is a minus it is overwritten,
+- + sign doesn-t work with u
+- location of star doesn't matter
+- 0 and + work together
+- - overrides 0 and ' '
+- '0' ovverrides ' '
+- + ovverrides ' '
+- * on it's own default behaviour is to add spaces at front
+- ' ' always puts a space at front, no matter number
+
+Ascendency summary:
+
+1. '-' > '0' > ' '
+2. '+' works in all cases, and acts like ' ' if no other modifiers used.
+3. if no flags and only star, works ike ' '
+
+
+pseudocode
+
+if 0, call 0 function, if ' ', call ' ' function,
+put_nbr
+if '-', call minus function
