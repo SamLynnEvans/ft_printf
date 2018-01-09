@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 10:58:37 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/05 12:31:30 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/09 12:58:14 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_rc_putnbr(long num)
 	}
 }
 
-void		ft_putnbr(int n)
+void		pf_putnbr(int n)
 {
 	long	a;
 
@@ -29,7 +29,6 @@ void		ft_putnbr(int n)
 	if (a < 0)
 	{
 		a *= -1;
-		ft_putchar('-');
 	}
 	if (a == 0)
 		ft_putchar('0');

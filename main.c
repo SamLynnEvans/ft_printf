@@ -1,10 +1,14 @@
 #include "ft_printf.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int		main()
+int		main(int argc, char **av)
 {
 	char	*p = "pie";
 	char	*s = "sam";
 	int		 d = 66;		
-	
-	ft_printf("sam is %#####s and pie is %s and he likes %x", p, s, 12);
+	long long		 x = atoi(av[1]);
+
+	ft_printf("my result = %# 32x\n", atoi(av[1]));
+	printf("pf result = %# 32x\n", atoi(av[1]));
 }

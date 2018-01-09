@@ -1,12 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main()
+int main(int argc, char **argv)
 {
 	char p = 'd';
 	char	*g = "hello";
-	long		s = 3000000000011;
+	int		s = -1356;
 	unsigned int u = (unsigned int)(s);
 
 
-	printf("my %s and %s house %#X hey", s);
+	printf("my house %x hey", atoi(argv[1]));
 }

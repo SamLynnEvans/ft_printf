@@ -8,5 +8,5 @@ int	get_num_length(long long num, int base)
 		num /= base;
 		count++;
 	}
-	return (count);
+	return ((count == 0) ? 1 : count);
 }

@@ -18,6 +18,7 @@ char	is_char_type(char *c)
 char	*get_flags(char *str, int *skip, int *mod)
 {
 	int		i;
+	int		j;
 	char	*flags;
 	
 	i = 0;
@@ -27,19 +28,21 @@ char	*get_flags(char *str, int *skip, int *mod)
 	*skip = i + 1;
 	flags = malloc(sizeof(char) * (i + 1));
 	i = 0;
+	j = 0;
 	while (FLAG_CHARACTERS)
 	{
-		flags[i] = str[i];
 		if (str[i] >= '1' && str[i] <= '9')
 		{
 			*mod = ft_atoi(str + i);
-			i += get_num_length(*mod, DECIMAL) - 1;
+			while (str[i] <= '9' && str[i] >= '0')
+				i++;
 		}
+		flags[j++] = str[i];
 		if (str[i] == '*')
 			*mod = STAR;
 		i++;
 	}
-	flags[i] = '\0';
+	flags[j] = '\0';
 	return (flags);
 }
 

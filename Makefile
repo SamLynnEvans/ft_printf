@@ -6,11 +6,11 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/08 18:33:16 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/01/08 20:40:44 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_pf_decimal.c \
+SRC = int_printers.c \
 ft_pf_percent.c \
 ft_pf_string.c \
 ft_printf.c \

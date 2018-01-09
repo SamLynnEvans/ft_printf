@@ -6,14 +6,14 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/08 18:45:21 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/09 13:30:50 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # define STAR -1
-# define FLAG_CHARACTERS str[i] == '#' || str[i] == '+' || str[i] == '-' || str[i] == ' ' || str[i] == '0' || str[i] == 'j' || str[i] == 'l'|| str[i] == 'z' || str[i] == 'h' || str[i] == '*' || (str[i] <= '9' && str[i] >= '0')
+# define FLAG_CHARACTERS str[i] == '#' || str[i] == '+' || str[i] == '-' || str[i] == ' ' || str[i] == '0' || str[i] == 'j' || str[i] == 'l' || str[i] == 'z' || str[i] == 'h' || str[i] == '*' || (str[i] <= '9' && str[i] >= '0')
 # define DECIMAL 10
 # define HEXA 16
 # define OCTAL 8
@@ -41,16 +41,22 @@ typedef struct	s_print_chars
 
 
 void	ft_pf_string(char *str, char *flags);
+void	ft_pf_octal(long long num, char *flags, int mod);
+void	ft_pf_hex_upper(long long num, char *flags, int mod);
 void	ft_pf_percent(char *str, char *flags);
-void	ft_putbase_lower(long long num, int	base);
-void	print_zeroes(long long num, int mod, int plus, int base);
+void	ft_putbase(long long num, int	base, int filler, int caps);
+void	dec_print_zeroes(int zeroes, int plus);
+void	nondec_print_zeroes(int zeroes, int base, int precision, int caps);
 void	ft_pf_hex_lower(long long num, char *flags, int mod);
-char	get_space_type(char *flags, int *plus);
+char	get_space_type(char *flags);
 int		get_num_length(long long num, int base);
 void	ft_pf_decimal(long long num, char *flags, int star);
 void	ft_printf(char *str, ...);
 void	print_number(int num, char *flags, char *c, int star);
-void	print_spaces(long long num, int mod, char is_space, int plus, int base);
-void	print_left_adj(long long num, int mod, int base);
+void	dec_print_spaces(int spaces, char is_space, int plus);
+void	nondec_print_spaces(int spaces, int base, int precision, int caps);
+void	print_left_adj(int spaces);
+void	pf_putnbr(int n);
+int		print_precision(int base, int caps, int mod);
 
 #endif
