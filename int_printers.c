@@ -6,20 +6,18 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 15:54:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/09 16:25:54 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/09 19:26:55 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_pf_decimal(long long n, char *flags, int mod)
+void	pf_int_decimal(long long num, char *flags, int mod)
 {
-	int		num;
 	char	space_type;
 	int		plus;
 	int		num_length;
 
-	num = (int)n;
 	num_length = get_num_length(num, DECIMAL);
 	plus = (ft_strrchr(flags, '+')) ? 1 : 0;
 	space_type = get_space_type(flags);
@@ -34,12 +32,12 @@ void	ft_pf_decimal(long long n, char *flags, int mod)
 		ft_putchar('+');
 		mod--;
 	}
-	pf_putnbr(num);
+	ft_putnbr(num);
 	if (space_type == '-')
 		print_left_adj(mod - num_length);
 }
 
-void	ft_pf_hex_lower(long long n, char *flags, int mod)
+void	pf_int_hex_lower(long long n, char *flags, int mod)
 {
 	int		num;
 	char	space_type;
@@ -63,7 +61,7 @@ void	ft_pf_hex_lower(long long n, char *flags, int mod)
 		print_left_adj(mod - num_length);
 }
 
-void	ft_pf_hex_upper(long long n, char *flags, int mod)
+void	pf_int_hex_upper(long long n, char *flags, int mod)
 {
 	int		num;
 	char	space_type;
@@ -87,7 +85,7 @@ void	ft_pf_hex_upper(long long n, char *flags, int mod)
 		print_left_adj(mod - num_length);
 }
 
-void ft_pf_octal(long long n, char *flags, int mod)
+void pf_int_octal(long long n, char *flags, int mod)
 {
 	int		num;
 	char	space_type;

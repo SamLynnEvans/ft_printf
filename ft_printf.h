@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/09 13:30:50 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/09 19:27:11 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,19 @@ typedef struct	s_print_chars
 
 
 void	ft_pf_string(char *str, char *flags);
-void	ft_pf_octal(long long num, char *flags, int mod);
-void	ft_pf_hex_upper(long long num, char *flags, int mod);
+void	pf_int_octal(long long num, char *flags, int mod);
+void	pf_int_hex_upper(long long num, char *flags, int mod);
 void	ft_pf_percent(char *str, char *flags);
 void	ft_putbase(long long num, int	base, int filler, int caps);
 void	dec_print_zeroes(int zeroes, int plus);
 void	nondec_print_zeroes(int zeroes, int base, int precision, int caps);
-void	ft_pf_hex_lower(long long num, char *flags, int mod);
+void	pf_int_hex_lower(long long num, char *flags, int mod);
 char	get_space_type(char *flags);
 int		get_num_length(long long num, int base);
-void	ft_pf_decimal(long long num, char *flags, int star);
+void	pf_int_decimal(long long num, char *flags, int mod);
+void	pf_int_unsigned(long long num, char *flags, int mod);
 void	ft_printf(char *str, ...);
-void	print_number(int num, char *flags, char *c, int star);
+void	print_number(va_list ap, char *flags, char *c, int mod);
 void	dec_print_spaces(int spaces, char is_space, int plus);
 void	nondec_print_spaces(int spaces, int base, int precision, int caps);
 void	print_left_adj(int spaces);

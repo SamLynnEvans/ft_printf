@@ -101,7 +101,7 @@ void	ft_printf(char *str, ...)
 			flags = get_flags(str + 1, &skip, &mod);
 			read_stars(ap, flags, &mod);
 			if (!(is_char_type(str + skip)))
-				print_number(va_arg(ap, long long), flags, str + skip, mod);
+				print_number(ap, flags, str + skip, mod);
 			else
 				print_chars(va_arg(ap, char *), flags, str + skip, mod);
 			str += skip;

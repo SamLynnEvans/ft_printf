@@ -6,13 +6,13 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 10:58:37 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/09 19:25:57 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/09 19:25:05 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_rc_putnbr(long num)
+static void	ft_rc_putnbr(long long num)
 {
 	if (num)
 	{
@@ -21,11 +21,8 @@ static void	ft_rc_putnbr(long num)
 	}
 }
 
-void		ft_putnbr(int n)
+void		pf_putnbr(long long a)
 {
-	long	a;
-
-	a = (long)n;
 	if (a < 0)
 	{
 		a *= -1;
