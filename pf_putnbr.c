@@ -6,11 +6,11 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 10:58:37 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/09 19:25:05 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/09 20:59:05 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static void	ft_rc_putnbr(long long num)
 {

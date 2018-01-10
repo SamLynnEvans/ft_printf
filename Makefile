@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/09 19:19:57 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/01/10 12:29:35 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,12 @@ ft_atoi.c \
 ft_strrchr.c \
 get_num_length.c \
 num_flags.c \
-ft_putbase_lower.c \
+ft_putbase.c \
 pf_putnbr.c \
 ft_putnbr.c \
-pf_int_unsigned.c \
+pf_unsigned.c \
+long_printers.c \
+longlong_printers.c \
 
 OBJ = $(SRC:.c=.o)
 

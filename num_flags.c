@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/09 13:32:10 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/09 23:56:24 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,19 @@ char	get_space_type(char *flags)
 void	dec_print_spaces(int spaces, char is_space, int plus)
 {
 	if (spaces <= 0 && plus == 1)
-	{
 		ft_putchar('+');
-		return ;
-	}
-	else if (is_space && spaces <= 0)
-	{
+	else if (is_space && spaces <= 0 && plus != -1)
 		ft_putchar(' ');
-		return ;
-	}
-	while (spaces > 0)
+	else
 	{
-		if (spaces - 1 == 0 && plus == 1)
-			ft_putchar('+');
-		else
-			ft_putchar(' ');
-		spaces--;
+		while (spaces > 0)
+		{
+			if (spaces - 1 == 0 && plus == 1)
+				ft_putchar('+');
+			else
+				ft_putchar(' ');
+			spaces--;
+		}
 	}
 	if (plus == -1)
 		ft_putchar('-');

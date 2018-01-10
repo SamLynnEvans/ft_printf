@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/09 19:18:05 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/10 12:36:19 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ t_print_num			g_pf_num_tab[] =
 	{"o", "0", &pf_int_octal},
 	{"O", "0", &pf_int_octal},
 	{"u", "0", &pf_int_unsigned},
+	{"d", "L", &pf_ll_decimal},
+	{"D", "L", &pf_ll_decimal},
+	{"i", "L", &pf_ll_decimal},
+	{"x", "L", &pf_ll_hex_lower},
+	{"X", "L", &pf_ll_hex_upper},
+	{"o", "L", &pf_ll_octal},
+	{"O", "L", &pf_ll_octal},
 };
 
 char	read_count(int count[4])
@@ -40,7 +47,6 @@ char	read_count(int count[4])
 		return ('h');
 	return ('0');
 }
-
 
 char	get_int_size(char *flags)
 {
@@ -83,16 +89,21 @@ void	print_number(va_list ap, char *flags, char *c, int mod)
 {
 	int		j;
 	char	int_size;
-		
+
 	int_size = get_int_size(flags);
 	j = 0;
-	while (j < 10)
+	if (*c == 'u' && int_size == 'L')
+		pf_ll_unsigned(va_arg(ap, unsigned long long), flags, mod);
+	else
 	{
-		if (*c == *g_pf_num_tab[j].c && int_size == *g_pf_num_tab[j].int_size)
+		while (j < 30)
 		{
+			if (*c == *g_pf_num_tab[j].c && int_size == *g_pf_num_tab[j].int_size)
+			{
 				g_pf_num_tab[j].print(get_num(ap, int_size), flags, mod);
-			break ;
+				break ;
+			}
+			j++;
 		}
-		j++;
 	}
 }
