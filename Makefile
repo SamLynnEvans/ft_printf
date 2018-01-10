@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/10 12:29:35 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/01/10 16:15:43 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ ft_putnbr.c \
 pf_unsigned.c \
 long_printers.c \
 longlong_printers.c \
+short_printers.c \
+hh_printers.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -36,7 +38,7 @@ NAME = libftprintf.a
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -c -Wall -Wextra -Werror $(SRC) -Ift_printf.h -Ilibft.h
+	gcc -c -Wall -Wextra -Werror $(SRC) -Ift_printf.h -Ilibft.h -g
 	ar rc $(NAME) $(OBJ)
 
 clean:

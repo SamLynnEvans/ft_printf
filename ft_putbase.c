@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:45:10 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/09 23:54:49 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/10 14:10:11 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	neg_base_printer(long long num, int base, int int_size, int caps)
 	}
 	ft_print_output(output, count[1], base);
 }
-
 
 void	ft_putbase(long long num, int base, int int_size, int caps)
 {

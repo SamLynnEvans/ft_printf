@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/10 12:36:19 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/10 16:01:44 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,47 @@ t_print_num			g_pf_num_tab[] =
 	{"X", "L", &pf_ll_hex_upper},
 	{"o", "L", &pf_ll_octal},
 	{"O", "L", &pf_ll_octal},
+	{"u", "L", &pf_ll_unsigned},
+	{"d", "j", &pf_ll_decimal},
+	{"D", "j", &pf_ll_decimal},
+	{"i", "j", &pf_ll_decimal},
+	{"x", "j", &pf_ll_hex_lower},
+	{"X", "j", &pf_ll_hex_upper},
+	{"o", "j", &pf_ll_octal},
+	{"O", "j", &pf_ll_octal},
+	{"u", "j", &pf_ll_unsigned},
+	{"d", "l", &pf_ll_decimal},
+	{"D", "l", &pf_ll_decimal},
+	{"i", "l", &pf_ll_decimal},
+	{"x", "l", &pf_ll_hex_lower},
+	{"X", "l", &pf_ll_hex_upper},
+	{"o", "l", &pf_ll_octal},
+	{"O", "l", &pf_ll_octal},
+	{"u", "l", &pf_ll_unsigned},
+	{"d", "z", &pf_ll_decimal},
+	{"D", "z", &pf_ll_decimal},
+	{"i", "z", &pf_ll_decimal},
+	{"x", "z", &pf_ll_hex_lower},
+	{"X", "z", &pf_ll_hex_upper},
+	{"o", "z", &pf_ll_octal},
+	{"O", "z", &pf_ll_octal},
+	{"u", "z", &pf_ll_unsigned},
+	{"d", "h", &pf_short_decimal},
+	{"x", "h", &pf_short_hex_lower},
+	{"D", "h", &pf_short_decimal},
+	{"i", "h", &pf_short_decimal},
+	{"X", "h", &pf_short_hex_upper},
+	{"o", "h", &pf_short_octal},
+	{"O", "h", &pf_short_octal},
+	{"u", "h", &pf_short_unsigned},
+	{"d", "H", &pf_shortshort_decimal},
+	{"x", "H", &pf_shortshort_hex_lower},
+	{"D", "H", &pf_shortshort_decimal},
+	{"i", "H", &pf_shortshort_decimal},
+	{"X", "H", &pf_shortshort_hex_upper},
+	{"o", "H", &pf_shortshort_octal},
+	{"O", "H", &pf_shortshort_octal},
+	{"u", "H", &pf_shortshort_unsigned},
 };
 
 char	read_count(int count[4])
@@ -92,11 +133,11 @@ void	print_number(va_list ap, char *flags, char *c, int mod)
 
 	int_size = get_int_size(flags);
 	j = 0;
-	if (*c == 'u' && int_size == 'L')
-		pf_ll_unsigned(va_arg(ap, unsigned long long), flags, mod);
-	else
-	{
-		while (j < 30)
+//	if (*c == 'u' && int_size == 'L')
+//		pf_ll_unsigned(va_arg(ap, unsigned long long), flags, mod);
+//	else
+//	{
+	while (j < 100)
 		{
 			if (*c == *g_pf_num_tab[j].c && int_size == *g_pf_num_tab[j].int_size)
 			{
@@ -105,5 +146,5 @@ void	print_number(va_list ap, char *flags, char *c, int mod)
 			}
 			j++;
 		}
-	}
+//	}
 }
