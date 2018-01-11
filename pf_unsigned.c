@@ -6,13 +6,13 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 17:10:28 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/10 16:12:49 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/11 14:12:32 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	pf_int_unsigned(long long n, char *flags, int mod)
+int	pf_int_unsigned(long long n, char *flags, int mod)
 {
 	unsigned int	num;
 	char			space_type;
@@ -30,9 +30,10 @@ void	pf_int_unsigned(long long n, char *flags, int mod)
 	pf_putnbr(num);
 	if (space_type == '-')
 		print_left_adj(mod - num_length);
+	return (mod > num_length) ? mod : num_length;
 }
 
-void	pf_ll_unsigned(long long n, char *flags, int mod)
+int	pf_ll_unsigned(long long n, char *flags, int mod)
 {
 	unsigned long long	num;
 	char				space_type;
@@ -50,9 +51,10 @@ void	pf_ll_unsigned(long long n, char *flags, int mod)
 	pf_putnbr_unsigned(num);
 	if (space_type == '-')
 		print_left_adj(mod - num_length);
+	return (mod > num_length) ? mod : num_length;
 }
 
-void	pf_short_unsigned(long long n, char *flags, int mod)
+int	pf_short_unsigned(long long n, char *flags, int mod)
 {
 	unsigned short		num;
 	char				space_type;
@@ -70,9 +72,10 @@ void	pf_short_unsigned(long long n, char *flags, int mod)
 	pf_putnbr_unsigned(num);
 	if (space_type == '-')
 		print_left_adj(mod - num_length);
+	return (mod > num_length) ? mod : num_length;
 }
 
-void	pf_shortshort_unsigned(long long n, char *flags, int mod)
+int	pf_hh_unsigned(long long n, char *flags, int mod)
 {
 	unsigned char	num;
 	char			space_type;
@@ -90,4 +93,5 @@ void	pf_shortshort_unsigned(long long n, char *flags, int mod)
 	pf_putnbr_unsigned(num);
 	if (space_type == '-')
 		print_left_adj(mod - num_length);
+	return (mod > num_length) ? mod : num_length;
 }

@@ -1,12 +1,5 @@
 #include "ft_printf.h"
 
-t_print_chars		g_pf_char_tab[] =
-{
-	{"s", &ft_pf_string},
-	{"%", &ft_pf_percent},
-};
-
-
 char	is_char_type(char *c)
 {
 	if (*c == 's' || *c == 'c')
@@ -46,22 +39,6 @@ char	*get_flags(char *str, int *skip, int *mod)
 	return (flags);
 }
 
-void	print_chars(char *prnt_str, char *flags, char *c, int star)
-{
-	int		j;
-
-	star = 0;
-	j = 0;
-	while (j < 3)
-	{
-		if (*c == *g_pf_char_tab[j].c)
-		{
-			g_pf_char_tab[j].print(prnt_str, flags);
-			break ;
-		}
-		j++;
-	}
-}
 
 void read_stars(va_list ap, char *flags, int *mod)
 {
@@ -86,13 +63,15 @@ void read_stars(va_list ap, char *flags, int *mod)
 	}
 }	
 
-void	ft_printf(char *str, ...)
+int	ft_printf(char *str, ...)
 {
 	va_list	ap;
 	int		skip;
 	char	*flags;
 	int		mod;
+	int		count;
 
+	count = 0;
 	va_start(ap, str);
 	while (*str)
 	{
@@ -101,15 +80,20 @@ void	ft_printf(char *str, ...)
 			flags = get_flags(str + 1, &skip, &mod);
 			read_stars(ap, flags, &mod);
 			if (!(is_char_type(str + skip)))
-				print_number(ap, flags, str + skip, mod);
-			else
+				count += print_number(ap, flags, str + skip, mod);
+			else 
 				print_chars(va_arg(ap, char *), flags, str + skip, mod);
 			str += skip;
 			free(flags);
 		}
 		else
+		{
+			count++; 
 			ft_putchar(*str);
+		}
 		str++;
 	}
 	va_end(ap);
+//	ft_intdebug(count, "char count");
+	return (count);
 }

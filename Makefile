@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/10 16:15:43 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/01/10 19:55:01 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ long_printers.c \
 longlong_printers.c \
 short_printers.c \
 hh_printers.c \
+print_chars.c \
 
 OBJ = $(SRC:.c=.o)
 

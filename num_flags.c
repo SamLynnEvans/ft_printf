@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/09 23:56:24 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/11 14:29:44 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,14 @@ char	get_space_type(char *flags)
 	return (0);
 }
 
-void	dec_print_spaces(int spaces, char is_space, int plus)
+int	dec_print_spaces(int spaces, char is_space, int plus)
 {
-	if (spaces <= 0 && plus == 1)
+	int nl_mod;
+	
+	nl_mod = 1;
+	if (plus == -1)
+		spaces--;
+	else if (spaces <= 0 && plus == 1)
 		ft_putchar('+');
 	else if (is_space && spaces <= 0 && plus != -1)
 		ft_putchar(' ');
@@ -52,13 +57,18 @@ void	dec_print_spaces(int spaces, char is_space, int plus)
 				ft_putchar(' ');
 			spaces--;
 		}
+		nl_mod = 0;
 	}
 	if (plus == -1)
 		ft_putchar('-');
+	return (nl_mod);
 }
 
-void	nondec_print_spaces(int spaces, int base, int precision, int caps)
+int	nondec_print_spaces(int spaces, int base, int precision, int caps)
 {
+	int	nl_mod;
+
+	nl_mod = spaces;
 	if (precision)
 	{
 		if (base == 8)
@@ -66,6 +76,7 @@ void	nondec_print_spaces(int spaces, int base, int precision, int caps)
 		if (base == 16)
 			spaces -= 2;
 	}
+	nl_mod -= spaces;
 	while (spaces-- > 0)
 		ft_putchar(' ');
 	if (precision)
@@ -77,24 +88,35 @@ void	nondec_print_spaces(int spaces, int base, int precision, int caps)
 		if (base == 16 && caps)
 			ft_putstr("0X");
 	}
+	return (nl_mod);
 }
 
-void	dec_print_zeroes(int zeroes, int plus)
+int	dec_print_zeroes(int zeroes, int plus)
 {
+	int	nl_mod;
 
+	nl_mod = zeroes;
 	if (plus == -1)
+	{
 		ft_putchar('-');
+		zeroes--;
+	}
 	if (plus == 1)
 	{
 		ft_putchar('+');
 		zeroes--;
 	}
-	while (zeroes-- > 0)
-		ft_putchar('0');
+	nl_mod -= zeroes;
+		while (zeroes-- > 0)
+			ft_putchar('0');
+	return (nl_mod);
 }
 
-void	nondec_print_zeroes(int zeroes, int base, int precision, int caps)
+int	nondec_print_zeroes(int zeroes, int base, int precision, int caps)
 {
+	int	nl_mod;
+	
+	nl_mod = zeroes;
 	if (precision)
 	{
 		if (base == 8)
@@ -109,28 +131,44 @@ void	nondec_print_zeroes(int zeroes, int base, int precision, int caps)
 		if (base == 16 && caps)
 			ft_putstr("0X");
 	}
+	nl_mod -= zeroes;
 	while (zeroes-- > 0)
 		ft_putchar('0');
+	return (nl_mod);
 }
 
-int		print_precision(int base, int caps, int mod)
+int		print_precision(int base, int caps)
 {
+	int nl_mod;
+
+	nl_mod = 0;
 	if (base == 8)
 	{
-		mod--;
+		nl_mod++;
 		ft_putchar('0');
 	}
 	if (base == 16)
-		mod -= 2;
+		nl_mod += 2;
 	if (base == 16 && !caps)
 		ft_putstr("0x");
 	if (base == 16 && caps)
 		ft_putstr("0X");
-	return (mod);
+	return (nl_mod);
 }
 
 void	print_left_adj(int spaces)
 {
 	while (spaces-- > 0)
 		ft_putchar(' ');
+}
+
+int	put_sign(int plus)
+{
+	if (plus == 0)
+		return (0);
+	if (plus == 1)
+		ft_putchar('+');
+	if (plus == -1)
+		ft_putchar('-');
+	return (1);
 }

@@ -13,14 +13,24 @@ int		main(int argc, char **av)
 	long long		 g = 661232;		
 	long long		 h = -922337203685477580;		
 	long long		 i = -6645646;		
+	wchar_t b = 5;
+	int ret1;
+	int	ret2;
 
+//	printf("%S\n", b);
+
+//	ft_printf("print the string %ls", "hello");
+//	printf("print the character %lc", 'c');
 //	ft_printf("my result = %#llu  %llu %llu %llu %llu % 10lld %llu \n", atoi(av[1]), d, e, f, g, h, i);
 //	printf("pf result = %#llu  %llu %llu %llu %llu % 10lld %llu \n", atoi(av[1]), d, e, f, g, h, i);
-//	ft_printf("my result = %30hx\n", atoi(av[1]));
-	printf("pf result = %30hhd\n", atoi(av[1]));
-	printf("pf result = %30hd\n", atoi(av[1]));
-	ft_printf("my result = %30hhd\n", atoi(av[1]));
-	ft_printf("my result = %30hd\n", atoi(av[1]));
+	ret1 = ft_printf("%5d\n", atoi(av[1]));
+	ret2 = printf("%5d\n", atoi(av[1]));
+	printf("my return value = %d\npf return value = %d\n", ret1, ret2);
+	
+	
+//	printf("pf result = %30hd\n", atoi(av[1]));
+//	ft_printf("my result = %30hhd\n", atoi(av[1]));
+//	ft_printf("my result = %30hd\n", atoi(av[1]));
 	//	printf("pf result = %# +32d\n", atoi(av[1]));
 /*	ft_printf("my result = %# +32llu\n", atoi(av[1]));
 	printf("pf result = %# +32llu\n", atoi(av[1]));

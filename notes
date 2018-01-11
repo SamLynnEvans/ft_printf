@@ -1,0 +1,8 @@
+- deal with '.' ie add to flags
+- deal with percent sign
+- investigate negative numbers
+- investigate X !
+- if number is 0, no precision
+- negative numbers d
+- add u
+- look into how printf deals with '.' in flags ie %5.2d
