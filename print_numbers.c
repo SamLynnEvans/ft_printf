@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/11 14:10:43 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/11 21:46:56 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_print_num			g_pf_num_tab[] =
 	{"o", "0", &pf_int_octal},
 	{"O", "0", &pf_int_octal},
 	{"u", "0", &pf_int_unsigned},
+	{"U", "0", &pf_ll_unsigned},
 	{"d", "L", &pf_int_decimal},
 	{"D", "L", &pf_int_decimal},
 	{"i", "L", &pf_int_decimal},
@@ -30,6 +31,7 @@ t_print_num			g_pf_num_tab[] =
 	{"o", "L", &pf_ll_octal},
 	{"O", "L", &pf_ll_octal},
 	{"u", "L", &pf_ll_unsigned},
+	{"U", "L", &pf_ll_unsigned},
 	{"d", "j", &pf_int_decimal},
 	{"D", "j", &pf_int_decimal},
 	{"i", "j", &pf_int_decimal},
@@ -38,6 +40,7 @@ t_print_num			g_pf_num_tab[] =
 	{"o", "j", &pf_ll_octal},
 	{"O", "j", &pf_ll_octal},
 	{"u", "j", &pf_ll_unsigned},
+	{"U", "j", &pf_ll_unsigned},
 	{"d", "l", &pf_int_decimal},
 	{"D", "l", &pf_int_decimal},
 	{"i", "l", &pf_int_decimal},
@@ -45,7 +48,8 @@ t_print_num			g_pf_num_tab[] =
 	{"X", "l", &pf_ll_hex_upper},
 	{"o", "l", &pf_ll_octal},
 	{"O", "l", &pf_ll_octal},
-	{"u", "l", &pf_ll_unsigned},
+	{"u", "l", &pf_long_unsigned},
+	{"U", "l", &pf_ll_unsigned},
 	{"d", "z", &pf_int_decimal},
 	{"D", "z", &pf_int_decimal},
 	{"i", "z", &pf_int_decimal},
@@ -54,6 +58,7 @@ t_print_num			g_pf_num_tab[] =
 	{"o", "z", &pf_ll_octal},
 	{"O", "z", &pf_ll_octal},
 	{"u", "z", &pf_ll_unsigned},
+	{"U", "z", &pf_ll_unsigned},
 	{"d", "h", &pf_short_decimal},
 	{"x", "h", &pf_short_hex_lower},
 	{"D", "h", &pf_short_decimal},
@@ -62,6 +67,7 @@ t_print_num			g_pf_num_tab[] =
 	{"o", "h", &pf_short_octal},
 	{"O", "h", &pf_short_octal},
 	{"u", "h", &pf_short_unsigned},
+	{"U", "h", &pf_ll_unsigned},
 	{"d", "H", &pf_hh_decimal},
 	{"x", "H", &pf_hh_hex_lower},
 	{"D", "H", &pf_hh_decimal},
@@ -70,6 +76,12 @@ t_print_num			g_pf_num_tab[] =
 	{"o", "H", &pf_hh_octal},
 	{"O", "H", &pf_hh_octal},
 	{"u", "H", &pf_hh_unsigned},
+	{"U", "H", &pf_ll_unsigned},
+};
+
+t_print_num	g_dot_num_tab[] =
+{
+	{"d", "0", &pf_dot_int_decimal},
 };
 
 char	read_count(int count[4])
@@ -133,18 +145,20 @@ int	print_number(va_list ap, char *flags, char *c, int mod)
 
 	int_size = get_int_size(flags);
 	j = 0;
-//	if (*c == 'u' && int_size == 'L')
-//		pf_ll_unsigned(va_arg(ap, unsigned long long), flags, mod);
-//	else
-//	{
-	while (j < 100)
+	if (*c == 'U')
+		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, mod));
+	if (ft_strrchr(flags, '.'))
+		while (j < 100)
 		{
-			if (*c == *g_pf_num_tab[j].c && int_size == *g_pf_num_tab[j].int_size)
-			{
-				return (g_pf_num_tab[j].print(get_num(ap, int_size), flags, mod));
-			}
+			if (*c == *g_dot_num_tab[j].c && int_size == *g_dot_num_tab[j].int_size)
+				return (g_dot_num_tab[j].print(get_num(ap, int_size), flags, mod));
 			j++;
 		}
-//	}
+	while (j < 100)
+	{
+		if (*c == *g_pf_num_tab[j].c && int_size == *g_pf_num_tab[j].int_size)
+			return (g_pf_num_tab[j].print(get_num(ap, int_size), flags, mod));
+		j++;
+	}
 	return (0);
 }

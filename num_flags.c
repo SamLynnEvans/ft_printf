@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/11 14:29:44 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/11 21:07:30 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	dec_print_spaces(int spaces, char is_space, int plus)
 	int nl_mod;
 	
 	nl_mod = 1;
-	if (plus == -1)
+	if (plus == -1 && spaces <= 0)
 		spaces--;
 	else if (spaces <= 0 && plus == 1)
 		ft_putchar('+');
@@ -49,6 +49,7 @@ int	dec_print_spaces(int spaces, char is_space, int plus)
 		ft_putchar(' ');
 	else
 	{
+		spaces -= (plus == -1) ? 1 : 0;
 		while (spaces > 0)
 		{
 			if (spaces - 1 == 0 && plus == 1)

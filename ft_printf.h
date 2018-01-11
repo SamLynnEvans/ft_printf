@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/11 14:12:47 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/11 21:42:53 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,17 @@ typedef struct	s_print_chars
 }				t_print_chars;
 
 char	get_space_type(char *flags);
-int	put_sign(int plus);
+int		pf_dot_int_decimal(long long num, char *flags, int mod);
+int		pf_long_unsigned(long long n, char *flags, int mod);
+int		put_sign(int plus);
 int		get_num_length(long long num, int base);
 int		get_unum_length(unsigned long long num, int base);
 int		print_precision(int base, int caps);
-int	dec_print_spaces(int spaces, char is_space, int plus);
-int	dec_print_zeroes(int zeroes, int plus);
+int		dec_print_spaces(int spaces, char is_space, int plus);
+int		dec_print_zeroes(int zeroes, int plus);
 void	ft_pf_percent(char *str, char *flags);
 void	ft_pf_string(char *str, char *flags);
-int	ft_printf(char *str, ...);
+int		ft_printf(char *str, ...);
 void	ft_putbase(long long num, int base, int filler, int caps);
 int	nondec_print_spaces(int spaces, int base, int precision, int caps);
 int	nondec_print_zeroes(int zeroes, int base, int precision, int caps);

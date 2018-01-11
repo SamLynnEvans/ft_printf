@@ -28,12 +28,11 @@ char	*get_flags(char *str, int *skip, int *mod)
 		{
 			*mod = ft_atoi(str + i);
 			while (str[i] <= '9' && str[i] >= '0')
-				i++;
+				flags[j++] = str[i++];
 		}
-		flags[j++] = str[i];
 		if (str[i] == '*')
 			*mod = STAR;
-		i++;
+		flags[j++] = str[i++];
 	}
 	flags[j] = '\0';
 	return (flags);

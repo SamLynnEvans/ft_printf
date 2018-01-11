@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:45:10 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/11 12:17:11 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/11 15:20:42 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ void ft_print_output(char *output, int output_len, int base)
 	int	first_letter;
 	
 	first_letter = 1;
-	while (output_len-- >= 0)
+	output_len--;
+	while (output_len >= 0)
 	{
 		if (base == OCTAL && first_letter)
 			ft_putchar('3');
 		else
 			ft_putchar(output[output_len]);
 		first_letter = 0;
+		output_len--;
 	}
 }
 
