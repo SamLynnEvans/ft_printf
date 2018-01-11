@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/11 21:46:56 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/11 23:50:04 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int	print_number(va_list ap, char *flags, char *c, int mod)
 	int_size = get_int_size(flags);
 	j = 0;
 	if (*c == 'U')
-		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, mod));
+		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, 0));
 	if (ft_strrchr(flags, '.'))
 		while (j < 100)
 		{

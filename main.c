@@ -24,7 +24,7 @@ int		main(int argc, char **av)
 //	ft_printf("my result = %#llu  %llu %llu %llu %llu % 10lld %llu \n", atoi(av[1]), d, e, f, g, h, i);
 //	printf("pf result = %#llu  %llu %llu %llu %llu % 10lld %llu \n", atoi(av[1]), d, e, f, g, h, i);
 	ret1 = ft_printf("%+10.12d\n", atoi(av[1]));
-	ret2 = printf("%+10.12d\n", atoi(av[1]));
+	ret2 = printf("%+#10.9x\n", atoi(av[1]));
 	printf("my return value = %d\npf return value = %d\n", ret1, ret2);
 	ret1 = ft_printf("%+10.6d\n", atoi(av[1]));
 	ret2 = printf("%+10.6d\n", atoi(av[1]));
@@ -37,6 +37,9 @@ int		main(int argc, char **av)
 	printf("my return value = %d\npf return value = %d\n", ret1, ret2);
 	ret1 = ft_printf("%+-10.4d\n", atoi(av[1]));
 	ret2 = printf("%+-10.4d\n", atoi(av[1]));
+	printf("my return value = %d\npf return value = %d\n", ret1, ret2);
+	ret1 = ft_printf("%+-.d\n", atoi(av[1]));
+	ret2 = printf("%+-.d\n", atoi(av[1]));
 	printf("my return value = %d\npf return value = %d\n", ret1, ret2);
 /*	ret1 = ft_printf("%05.2d\n", atoi(av[1]));
 	ret2 = printf("%05.2d\n", atoi(av[1]));

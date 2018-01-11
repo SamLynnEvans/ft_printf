@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/11 21:42:53 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/11 23:50:58 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ typedef struct	s_print_chars
 	p_chars		print; 
 }				t_print_chars;
 
+void get_mod_values(char *flags, int *mod, int *mod2);
+int	dec_mod2_greater_print(int plus, int mod2, long long num);
+int dec_dot_space_print(int plus, int mod, int mod2, long long num);
+int	dec_dot_lft_adj_print(int plus, int mod, int mod2, long long num);
+int	dec_dot_putnbr(long long num, int num_length, int plus);
 char	get_space_type(char *flags);
 int		pf_dot_int_decimal(long long num, char *flags, int mod);
 int		pf_long_unsigned(long long n, char *flags, int mod);
