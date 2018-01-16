@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/11 23:50:58 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/16 15:20:43 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include "libft.h"
 
 typedef int		(*p_num)(long long, char *, int);
+typedef int		(*p_dt_num)(long long, char *);
 typedef void	(*p_chars)(char *, char *);
 
 typedef struct	s_print_num
@@ -33,19 +34,53 @@ typedef struct	s_print_num
 	p_num		print; 
 }				t_print_num;
 
+typedef struct	s_print_dt_num
+{
+	char		*c;
+	char		*int_size;
+	p_dt_num	print; 
+}				t_print_dt_num;
+
 typedef struct	s_print_chars
 {
 	char		*c;
 	p_chars		print; 
 }				t_print_chars;
 
+int	dec_mod2_greater_print_us(int mod2, unsigned long long num);
+int dt_num_zero_case(int space_type, char *flags, int plus);
+int	mod_is_zero(char *flags);
+int dec_dot_space_print_us(int mod, int mod2, unsigned long long num);
+int	dec_dot_lft_adj_print_us(int mod, int mod2, unsigned long long num);
+int	pf_dot_unsigned_decimal(long long n, char *flags);
+int	pf_dot_unsigned_short_decimal(long long n, char *flags);
+int	pf_dot_unsigned_hh_decimal(long long n, char *flags);
+int	pf_dot_short_decimal(long long n, char *flags);
+int	pf_dot_short_hex_lower(long long n, char *flags);
+int	pf_dot_short_octal(long long n, char *flags);
+int	pf_dot_short_hex_upper(long long n, char *flags);
+int	non_dec_dot_leftadj_print1_uc(int num_l, char *flags, int base, int precision);
+int	non_dec_dot_spaceprint_uc(int num_l, char *flags, int base, int precision);
+int	pf_dot_ll_hex_lower(long long num, char *flags);
+int	pf_dot_ll_hex_upper(long long num, char *flags);
+int	pf_dot_ll_octal(long long num, char *flags);
 void get_mod_values(char *flags, int *mod, int *mod2);
+int	pf_dot_hh_decimal(long long n, char *flags);
+int	pf_dot_hh_hex_lower(long long n, char *flags);
+int	pf_dot_hh_hex_upper(long long n, char *flags);
+int	pf_dot_hh_octal(long long n, char *flags);
+int	pf_dot_int_hex_upper(long long n, char *flags);
+int	pf_dot_int_octal(long long n, char *flags);
 int	dec_mod2_greater_print(int plus, int mod2, long long num);
 int dec_dot_space_print(int plus, int mod, int mod2, long long num);
 int	dec_dot_lft_adj_print(int plus, int mod, int mod2, long long num);
-int	dec_dot_putnbr(long long num, int num_length, int plus);
+int	non_dec_dot_spaceprint(int num_l, char *flags, int base, int caps);
+int get_precision(int base);
+int	non_dec_dot_leftadj_print1(int num_l, char *flags, int base, int caps);
+int	non_dec_dot_leftadj_print2(int num_l, char *flags, int count);
 char	get_space_type(char *flags);
-int		pf_dot_int_decimal(long long num, char *flags, int mod);
+int		pf_dot_int_decimal(long long num, char *flags);
+int		pf_dot_int_hex_lower(long long n, char *flags);
 int		pf_long_unsigned(long long n, char *flags, int mod);
 int		put_sign(int plus);
 int		get_num_length(long long num, int base);

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 15:54:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/12 00:03:55 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/15 21:36:08 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	pf_int_hex_lower(long long n, char *flags, int mod)
 
 	num = (int)n;
 	num_length = get_num_length(num, HEXA);
-	precision = (ft_strrchr(flags, '#')) ? 1 : 0;
-	precision = (num == 0) ? 0 : precision;
+	precision = (ft_strrchr(flags, '#') && num != 0) ? 1 : 0;
 	space_type = get_space_type(flags);
 	if (num < 0)
 		num_length = (sizeof(int) * 8) / 4;
@@ -69,8 +68,7 @@ int	pf_int_hex_upper(long long n, char *flags, int mod)
 
 	num = (int)n;
 	num_length = get_num_length(num, HEXA);
-	precision = (ft_strrchr(flags, '#')) ? 1 : 0;
-	precision = (num == 0) ? 0 : precision;
+	precision = (ft_strrchr(flags, '#') && num != 0) ? 1 : 0;
 	space_type = get_space_type(flags);
 	if (num < 0)
 		num_length = (sizeof(int) * 8) / 4;
@@ -95,8 +93,7 @@ int pf_int_octal(long long n, char *flags, int mod)
 
 	num = (int)n;
 	num_length = get_num_length(num, OCTAL);
-	precision = (ft_strrchr(flags, '#')) ? 1 : 0;
-	precision = (num == 0) ? 0 : precision;
+	precision = (ft_strrchr(flags, '#') && num != 0) ? 1 : 0;
 	space_type = get_space_type(flags);
 	if (num < 0)
 		num_length = (sizeof(int) * 8) / 3 + 1;

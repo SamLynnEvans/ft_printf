@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/11 21:07:30 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/15 21:16:06 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	get_space_type(char *flags)
 			if (flags[i] >= '1' && flags[i] <= '9')
 				while (flags[i] >= '0' && flags[i] <= '9')
 					i++;
-			if (flags[i] == '0')
+			if (flags[i] == '0' && flags[i + 1] != '.' && flags[i - 1] != '.')
 				return ('0');
 			i++;
 		}
