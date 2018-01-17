@@ -28,7 +28,7 @@ int		main(int argc, char **av)
 //	printf("|\n"); 
 //	ret2 = printf("%");
 //	printf("|\n");
-	ft_printf("{RED}this text is red{EOC}, now it is not, {GREEN} and now it's green!{EOC}"); 
+	ft_printf("{RED}this text is{MAGENTA} red{EOC}, now it is not,{GREEN} and now it's green!{EOC}"); 
 	ret1 = ft_printf("%ls\n", "💩çççççç👹");
 	ret2 = printf("%s\n", str);
 	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);

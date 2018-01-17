@@ -138,14 +138,14 @@ int	print_colour(char *str, int *skip)
 
 	j = -1;
 	i = 0;
-	colour = malloc(sizeof(char) * 8);
-	while(str[i + 1] != '}' && i < 7)
+	colour = malloc(sizeof(char) * 11);
+	while(str[i + 1] != '}' && i < 10)
 	{
 		colour[i] = str[i + 1];
 		i++;
 	}
 	colour[i] = '\0';
-	while(j++ < 7)
+	while(++j < 7)
 		if(!(ft_strcmp(colour, g_colour_tab[j].colour)))
 		{
 			ft_putstr(g_colour_tab[j].print_c);
@@ -153,7 +153,6 @@ int	print_colour(char *str, int *skip)
 		}
 	if (j == 7)
 		ft_putchar(*str);
-
 	*skip = (j == 7) ? 0: i + 1;
 	free(colour);
 	return (j == 7) ? 1 : 0;
