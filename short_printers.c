@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 14:35:47 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/15 22:47:47 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 17:05:08 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	pf_short_decimal(long long n, char *flags, int mod)
 	else if (space_type == '0')
 		num_length+= dec_print_zeroes(mod - num_length, plus);
 	else if (space_type == '-' && num != 0)
-		num_length += put_sign(plus);
+		num_length += put_sign(plus, flags);
 	pf_putnbr(num);
 	if (space_type == '-')
 		print_left_adj(mod - num_length);

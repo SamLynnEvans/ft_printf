@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 15:57:45 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 17:15:25 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int		pf_dot_int_decimal(long long num, char *flags, int mod[2]);
 int		pf_dot_int_hex_lower(long long n, char *flags, int mod[2]);
 int		pf_long_unsigned(long long n, char *flags, int mod);
 int		print_precision(int base, int caps);
-int		put_sign(int plus);
-int		dec_dot_lft_adj_print(int plus, int mod, int mod2, long long num);
+int		put_sign(int plus, char *flags);
+int		dec_dot_lft_adj_print(int plus, int mod[2], char *flags, long long num);
 int		dec_dot_lft_adj_print_us(int mod, int mod2, unsigned long long num);
 int		dec_mod2_greater_print(int plus, int mod2, long long num);
 int		dec_mod2_greater_print_us(int mod2, unsigned long long num);

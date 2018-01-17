@@ -6,11 +6,22 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:05:55 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 15:51:13 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 17:15:46 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	print_sign(int plus)
+{
+	if (plus == 0)
+		return (0);
+	if (plus == 1)
+		ft_putchar('+');
+	if (plus == -1)
+		ft_putchar('-');
+	return (1);
+}
 
 int dt_num_zero_case(int space_type, int mod, int plus)
 {
@@ -28,7 +39,7 @@ int dt_num_zero_case(int space_type, int mod, int plus)
 		ft_putchar(' ');
 		count++;	
 	}
-	count += put_sign(plus);
+	count += print_sign(plus);
 	if (space_type == '-') 
 		while (mod > count++)
 			ft_putchar(' ');
@@ -42,7 +53,7 @@ int	dec_mod2_greater_print(int plus, int mod2, long long num)
 
 	count = 0;
 	num_length = get_num_length(num, DECIMAL);
-	count += put_sign(plus);
+	count += print_sign(plus);
 	while (mod2-- > num_length)
 	{	
 		count++;
@@ -65,28 +76,28 @@ int dec_dot_space_print(int plus, int mod, int mod2, long long num)
 		ft_putchar(' ');
 		mod--;
 	}
-	put_sign(plus);	
+	print_sign(plus);	
 	while (mod2-- > num_length)
 		ft_putchar('0');
 	pf_putnbr(num);
 	return (count);
 }
 
-int	dec_dot_lft_adj_print(int plus, int mod, int mod2, long long num)
+int	dec_dot_lft_adj_print(int plus, int mod[2], char *flags, long long num)
 {
 	int	count;
 	int	num_length;
 	
 	count = 0;
 	num_length = get_num_length(num, DECIMAL);
-	count += put_sign(plus);	
-	while (mod2-- > num_length)
+	count += put_sign(plus, flags);
+	while (mod[1]-- > num_length)
 	{
 		ft_putchar('0');
 		count++;
 	}
 	pf_putnbr(num);
-	while (mod	> num_length + count)
+	while (mod[0]	> num_length + count)
 	{
 		ft_putchar(' ');
 		count++;

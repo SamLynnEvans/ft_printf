@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 23:49:24 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 15:54:23 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 17:13:59 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	pf_dot_int_decimal(long long num, char *flags, int mod[2])
 		return (dec_mod2_greater_print(plus, mod[1], num));
 	else if (space_type != '-')
 		return (dec_dot_space_print(plus, mod[0], mod[1], num));
-	return (dec_dot_lft_adj_print(plus, mod[0], mod[1], num));
+	return (dec_dot_lft_adj_print(plus, mod, flags, num));
 }
 
 int	pf_dot_int_hex_lower(long long n, char *flags, int mod[2])

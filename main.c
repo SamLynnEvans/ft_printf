@@ -32,6 +32,11 @@ int		main(int argc, char **av)
 	ret1 = ft_printf("%ls\n", "💩çççççç👹");
 	ret2 = printf("%s\n", str);
 	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);
+	ret1 = ft_printf("% d|\n", 9876);
+	ret2 = printf("% d|\n", 9876);
+	ret1 = ft_printf("% -10.7d\n", 9876);
+	ret2 = printf("% -10.7d\n", 9876);
+	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);
 	ret1 = ft_printf("%C\n", "💩");
 	ret2 = printf("%lc\n", a);
 	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);

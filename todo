@@ -1,7 +1,7 @@
 - sort out dec points - {DONE}
-- clean up dot_stuff 
+- clean up dot_stuff - {DONE}
 - add 'p' - {DONE}
-- add colors
+- add colors - {DONE}
 - add fd?
 - null - {DONE}
 - stop crashes when reads too far - {DONE}
@@ -10,5 +10,5 @@
 
 errors
 
-- unsigned long long for int, cast as unsigned int
-- look into ' ' and '-' together for 'd'
+- unsigned long long for int, cast as unsigned int {DONE}
+- look into ' ' and '-' together for 'd' {DONE}

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/16 19:08:59 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 17:04:04 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,10 +163,17 @@ void	print_left_adj(int spaces)
 		ft_putchar(' ');
 }
 
-int	put_sign(int plus)
+int	put_sign(int plus, char *flags)
 {
 	if (plus == 0)
+	{
+		if (ft_strrchr(flags, ' '))
+		{
+			ft_putchar(' ');
+			return (1);
+		}
 		return (0);
+	}
 	if (plus == 1)
 		ft_putchar('+');
 	if (plus == -1)
