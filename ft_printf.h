@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 18:35:00 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 22:20:28 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@
 typedef int		(*p_num)(long long, char *, int);
 typedef int		(*p_dt_num)(long long, char *, int *);
 typedef void	(*p_chars)(char *, char *);
+typedef	void	(*p_unicode)(int);
+
+typedef struct	s_print_uc
+{
+	int			uc_size;
+	p_unicode 	print;
+}				t_print_uc;
 
 typedef struct	s_print_colour
 {
@@ -61,6 +68,13 @@ typedef struct	s_print_chars
 }				t_print_chars;
 
 char	get_space_type(char *flags);
+void	int_putchar(int c);
+int	dt_print_str(char *str, char *flags, int mod[2]);
+int	ft_putstr_unicode(int *str, char *flags, int mod);
+int	ft_putchar_unicode(int c, char *flags, int mod);
+void	print_uc_three_byte(int c);
+void	print_uc_two_byte(int c);
+void	print_uc_four_byte(int c);
 char	*ft_strjoin_free(char const *s1, char const *s2);
 int		dec_print_spaces(int spaces, char is_space, int plus);
 int		dec_print_zeroes(int zeroes, int plus, char *flags);
@@ -127,11 +141,11 @@ int		pf_short_hex_lower(long long n, char *flags, int mod);
 int		pf_short_hex_upper(long long n, char *flags, int mod);
 int		pf_short_octal(long long n, char *flags, int mod);
 int		pf_short_unsigned(long long n, char *flags, int mod);
-int		print_char(char c, char *flags, int mod[2]);
+int		print_char(char c, char *flags, int mod);
 int		print_chars(va_list ap, char *flags, char *c, int mod[2]);
 int		print_number(va_list ap, char *flags, char *c, int mod[2]);
 int		print_pointer(long long *p, char *flags, int mod);
-int		print_string(char *str, char *flags, int mod[2]);
+int		print_string(char *str, char *flags, int mod);
 int 	dec_dot_space_print(int plus, int mod[2], int num_l, long long num);
 int 	dec_dot_space_print_us(int mod, int mod2, unsigned long long num);
 int 	dt_num_zero_case(int space_type, int mod, int plus);
@@ -141,7 +155,7 @@ void	ft_pf_string(char *str, char *flags);
 void	ft_putbase(long long num, int base, int filler, int caps);
 void	pf_putnbr(long long n);
 void	pf_putnbr_unsigned(unsigned long long n);
-void	print_left_adj(int spaces);
+void	print_spaces(int spaces);
 void 	get_mod_values(char *flags, int *mod, int *mod2);
 
 #endif

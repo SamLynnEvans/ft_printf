@@ -30,8 +30,11 @@ int		main(int argc, char **av)
 //	printf("|\n"); 
 //	ret2 = printf("%");
 //	printf("|\n");
-	ret1 = ft_printf("%c\n", 100);
-	ret2 = printf("%10.2C\n", L'💩');
+	ret1 = ft_printf("%-20C\n", NULL);
+	ret2 = printf("%-20C\n", NULL);
+	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);
+	ret1 = ft_printf("%S\n", L"人名用漢字");
+	ret2 = printf("%S\n", L"人名用漢字");
 	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);
 	ret1 = ft_printf("%c\n", 100);
 	ret2 = printf("%C\n", L'💩');

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 17:35:32 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 22:05:16 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int		print_precision(int base, int caps)
 	return (nl_mod);
 }
 
-void	print_left_adj(int spaces)
+void	print_spaces(int spaces)
 {
 	while (spaces-- > 0)
 		ft_putchar(' ');

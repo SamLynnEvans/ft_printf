@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/17 22:16:21 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/01/17 22:22:47 by slynn-ev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 t_print_colour g_colour_tab[] = {
@@ -60,10 +72,16 @@ void get_modval(va_list ap, char *flags, int *mod, int *mod2)
 
 int	print_chars(va_list ap, char *flags, char *c, int mod[2])
 {
-	if (*c == 's' || *c == 'S' || *c == 'C')
-		return (print_string(va_arg(ap, char *), flags, mod));
+	if (*c == 'S')
+		return (ft_putstr_unicode(va_arg(ap, int *), flags, mod[0]));
+	else if (*c == 'C')
+		return (ft_putchar_unicode(va_arg(ap, int), flags, mod[0]));
+	else if (*c == 's')
+		return (print_string(va_arg(ap, char *), flags, mod[0]));
+	else if (*c == 's' && ft_strrchr(flags, '.'))
+		return (dt_print_str(va_arg(ap, char *), flags, mod));
 	else if (*c == 'c')
-		return (print_char(va_arg(ap, int), flags, mod));
+		return (print_char((char)(va_arg(ap, int)), flags, mod[0]));
 	else if (*c == '%')
 		return (print_char('%', flags, mod));
 	else if (*c == 'p')
@@ -135,16 +153,12 @@ int	ft_printf(char *str, ...)
 	va_start(ap, str);
 	while (*str)
 	{
+		skip = 0;
 		if (*str == '{')
-		{
 			count += print_colour(str, &skip);
-			str += skip;
-		}
 		else if (*str == '%')
-		{
 			count += print_variable(ap, &skip, str);
-			str += skip;
-		}
+		str += skip;
 		else
 		{
 			count++; 

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 19:25:15 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 18:58:26 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 22:20:16 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ void ft_putstrn(char *str, int n)
 		ft_putchar(str[i++]);
 }
 
-int	dt_print_str(char *str, char *flags, int mod[2], int l)
+int	dt_print_str(char *str, char *flags, int mod[2])
 {
 	char	space_type;
 	int		o_mod;
 	int		len;
-
-	len = (mod[1] < l) ? mod[1] : l;
+	
+	len = ft_strlen(str);
+	len = (mod[1] < len) ? mod[1] : len;
 	o_mod = mod[0];
 	space_type = get_space_type(flags);	
 	if (space_type != '-')
@@ -62,46 +63,36 @@ int	print_pointer(long long *p, char *flags, int mod)
 	return ((o_mod > num_length + 2) ? o_mod : num_length + 2);
 }
 
-int	print_string(char *str, char *flags, int mod[2])
+int	print_string(char *str, char *flags, int mod)
 {
 	char	space_type;
 	int		len;
-	int		o_mod;
 	int		null;
 
 	null = (str == NULL) ? 1 : 0;
 	if (null)
 		str = ft_strdup("(null)");
 	len = ft_strlen(str);
-	if (strrchr(flags, '.'))
-		return (dt_print_str(str, flags, mod, len));
-	o_mod = mod[0];
 	space_type = get_space_type(flags);	
 	if (space_type != '-')
-		while (mod[0]-- > len)
-			ft_putchar(' ');
+		print_spaces(mod - len);
 	ft_putstr(str);
 	if (space_type == '-')
-		while (mod[0]-- > len)
-			ft_putchar(' ');
+		print_spaces(mod - len);
 	if (null)
 		free(str);
-	return ((o_mod > len) ? o_mod : len);
+	return ((mod > len) ? mod : len);
 }
 
-int	print_char(char c, char *flags, int mod[2])
+int	print_char(char c, char *flags, int mod)
 {
 	char	space_type;
-	int		o_mod;
 
-	o_mod = mod[0];
 	space_type = get_space_type(flags);	
 	if (space_type != '-')
-		while (mod[0]-- > 1)
-			ft_putchar(' ');
+		print_spaces(mod - len);
 	ft_putchar(c);
 	if (space_type == '-')
-		while (mod[0]-- > 1)
-			ft_putchar(' ');
-	return ((o_mod > 1) ? o_mod : 1);
+		print_spaces(mod - len);
+	return ((mod > 1) ? mod : 1);
 }

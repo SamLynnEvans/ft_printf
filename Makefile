@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/17 18:36:29 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/01/17 21:37:36 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ libft/ft_strlen.c \
 libft/ft_strdup.c \
 libft/ft_strcmp.c \
 ft_strjoin_free.c \
+unicode.c \
 
 OBJ = $(SRC:.c=.o)
 
