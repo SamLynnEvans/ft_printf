@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:01 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/16 22:42:21 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 17:37:49 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	pf_ll_decimal(long long num, char *flags, int mod)
 	if (space_type == ' ' || !(space_type))
 		dec_print_spaces(mod - num_length, space_type, plus);	
 	else if (space_type == '0')
-		dec_print_zeroes(mod - num_length, plus);
+		dec_print_zeroes(mod - num_length, plus, flags);
 	else if (space_type == '-' && plus == 1 && num >= 0)
 	{
 		ft_putchar('+');

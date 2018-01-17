@@ -5,10 +5,13 @@
 - add fd?
 - null - {DONE}
 - stop crashes when reads too far - {DONE}
-- add unicode - {DONE} ?
+- add unicode
 - sort out libft files
 
 errors
 
 - unsigned long long for int, cast as unsigned int {DONE}
 - look into ' ' and '-' together for 'd' {DONE}
+- if * is negative, space_type = '-' {DONE} 
+- fixed . issue returning wrong balue {DONE}
+- saw to precison priting for octal with . {DONE}

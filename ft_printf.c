@@ -82,6 +82,11 @@ int	print_variable(va_list ap, int *skip, char *str)
 	mod[1] = 0;
 	flags = get_flags(str + 1, skip);
 		get_modval(ap, flags, &mod[0], &mod[1]);
+	if (mod[0] < 0)
+	{
+		flags = ft_strjoin_free(flags, "-");
+		mod[0] *= -1;
+	}	
 	if (ft_strrchr("dDuUixXoO", *(str + *skip)))
 		count += print_number(ap, flags, str + *skip, mod);
 	else if (ft_strrchr("cCsSp%", *(str + *skip)))

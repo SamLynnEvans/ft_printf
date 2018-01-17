@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:05:55 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 17:15:46 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 17:31:40 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,11 @@ int dt_num_zero_case(int space_type, int mod, int plus)
 	return (count);
 }
 
-int	dec_mod2_greater_print(int plus, int mod2, long long num)
+int	dec_mod2_greater_print(int plus, int mod2, long long num, int num_length)
 {	
 	int		count;
-	int		num_length;
 
 	count = 0;
-	num_length = get_num_length(num, DECIMAL);
 	count += print_sign(plus);
 	while (mod2-- > num_length)
 	{	
@@ -63,24 +61,22 @@ int	dec_mod2_greater_print(int plus, int mod2, long long num)
 	return (count + num_length);
 }
 
-int dec_dot_space_print(int plus, int mod, int mod2, long long num)	
+int dec_dot_space_print(int plus, int mod[2], int num_length, long long num)	
 {
 	int		count;
-	int		num_length;
 	
-	count = mod;
-	num_length = get_num_length(num, DECIMAL);
-	mod -= (plus == -1 || plus == 1) ? 1 : 0;
-	while (mod	> mod2 && mod > num_length)
+	count = mod[0];
+	mod[0] -= (plus == -1 || plus == 1) ? 1 : 0;
+	while (mod[0] > mod[1] && mod[0] > num_length)
 	{
 		ft_putchar(' ');
-		mod--;
+		mod[0]--;
 	}
 	print_sign(plus);	
-	while (mod2-- > num_length)
+	while (mod[1]-- > num_length)
 		ft_putchar('0');
 	pf_putnbr(num);
-	return (count);
+	return ((num_length > count) ? num_length : count);
 }
 
 int	dec_dot_lft_adj_print(int plus, int mod[2], char *flags, long long num)

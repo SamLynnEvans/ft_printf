@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <locale.h>
 
 int		main(int argc, char **av)
 {
@@ -23,19 +24,26 @@ int		main(int argc, char **av)
 	int ret1;
 	int	ret2;
 	p3 = &d;
+	setlocale(LC_CTYPE, "");
 
 //	ret1 = ft_printf("%");
 //	printf("|\n"); 
 //	ret2 = printf("%");
 //	printf("|\n");
-	ft_printf("{RED}this text is{MAGENTA} red{EOC}, now it is not,{GREEN} and now it's green!{EOC}"); 
-	ret1 = ft_printf("%ls\n", "💩çççççç👹");
-	ret2 = printf("%s\n", str);
+	ret1 = ft_printf("%c\n", 100);
+	ret2 = printf("%10.2C\n", L'💩');
 	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);
-	ret1 = ft_printf("% d|\n", 9876);
-	ret2 = printf("% d|\n", 9876);
-	ret1 = ft_printf("% -10.7d\n", 9876);
-	ret2 = printf("% -10.7d\n", 9876);
+	ret1 = ft_printf("%c\n", 100);
+	ret2 = printf("%C\n", L'💩');
+	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);
+	ret1 = ft_printf("%#*.1x|\n", -10, 1);
+	ret2 = printf("%#.1x\n", 1);
+	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);
+	ret1 = ft_printf("%#.3o\n", 1);
+	ret2 = printf("%#.3o\n", 1);
+	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);
+	ret1 = ft_printf("%#.3o\n", 0);
+	ret2 = printf("%#.3o\n", 0);
 	ft_printf("\nmy return value = %d\npf return value = %d\n", ret1, ret2);
 	ret1 = ft_printf("%C\n", "💩");
 	ret2 = printf("%lc\n", a);

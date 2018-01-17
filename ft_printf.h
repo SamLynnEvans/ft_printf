@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 17:15:25 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 18:35:00 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ typedef struct	s_print_chars
 }				t_print_chars;
 
 char	get_space_type(char *flags);
+char	*ft_strjoin_free(char const *s1, char const *s2);
 int		dec_print_spaces(int spaces, char is_space, int plus);
-int		dec_print_zeroes(int zeroes, int plus);
+int		dec_print_zeroes(int zeroes, int plus, char *flags);
 int		ft_printf(char *str, ...);
 int		get_num_length(long long num, int base);
 int		get_unum_length(unsigned long long num, int base);
@@ -73,7 +74,7 @@ int		print_precision(int base, int caps);
 int		put_sign(int plus, char *flags);
 int		dec_dot_lft_adj_print(int plus, int mod[2], char *flags, long long num);
 int		dec_dot_lft_adj_print_us(int mod, int mod2, unsigned long long num);
-int		dec_mod2_greater_print(int plus, int mod2, long long num);
+int		dec_mod2_greater_print(int plus, int mod2, long long num, int num_l);
 int		dec_mod2_greater_print_us(int mod2, unsigned long long num);
 int		non_dec_dot_leftadj_print1(int num_l, int mod, int base, int caps);
 int		non_dec_dot_leftadj_print1_uc(int num_l, int mod, int base, int precision);
@@ -131,7 +132,7 @@ int		print_chars(va_list ap, char *flags, char *c, int mod[2]);
 int		print_number(va_list ap, char *flags, char *c, int mod[2]);
 int		print_pointer(long long *p, char *flags, int mod);
 int		print_string(char *str, char *flags, int mod[2]);
-int 	dec_dot_space_print(int plus, int mod, int mod2, long long num);
+int 	dec_dot_space_print(int plus, int mod[2], int num_l, long long num);
 int 	dec_dot_space_print_us(int mod, int mod2, unsigned long long num);
 int 	dt_num_zero_case(int space_type, int mod, int plus);
 int 	get_precision(int base);

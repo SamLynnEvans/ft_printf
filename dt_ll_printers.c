@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 20:50:31 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 17:15:00 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 17:51:31 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	pf_dot_ll_octal(long long num, char *flags, int mod[2])
 	int		precision;
 
 	count = 0;
-	precision = (ft_strrchr(flags, '#') && num != 0) ? 1 : 0;
 	num_l = (num >= 0) ? get_num_length(num, OCTAL) : (sizeof(long long) * 8) / 3 + 1;
+	precision = (ft_strrchr(flags, '#') && num != 0 && mod[1] <= num_l) ? 1 : 0;
 	space_type = (ft_strrchr(flags, '-')) ? '-' : '0';
 	if (mod[1] == 0 && num == 0 && !(ft_strrchr(flags, '#')))
 		return (dt_num_zero_case(space_type, mod[0], 0));
