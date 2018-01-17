@@ -10,58 +10,25 @@ t_print_colour g_colour_tab[] = {
 	{"EOC", "\x1b[0m"},
 };
 
-char	*get_flags(char *str, int *skip, int *mod)
+char	*get_flags(char *str, int *skip)
 {
 	int		i;
-	int		j;
 	char	*flags;
 
 	i = 0;
-	*mod = 0;
 	while (FLAG_CHARACTERS && str[i])	
 		i++;
 	*skip = i + 1;
 	flags = malloc(sizeof(char) * (i + 1));
 	i = 0;
-	j = 0;
 	while (FLAG_CHARACTERS && str[i])
 	{
-		if (str[i] >= '1' && str[i] <= '9')
-		{
-			*mod = ft_atoi(str + i);
-			while (str[i] <= '9' && str[i] >= '0')
-				flags[j++] = str[i++];
-		}
-		if (str[i] == '*')
-			*mod = STAR;
-		flags[j++] = str[i++];
-	}
-	flags[j] = '\0';
-	return (flags);
-}
-
-void read_stars(va_list ap, char *flags, int *mod)
-{
-	int	star_count;
-	int	i;
-
-	i = 0;
-	star_count = 0;
-	while (*flags)
-	{
-		if (*flags == '*')
-			star_count++;
-		flags++;
-	}
-	while (i < star_count)
-	{
-		if (i + 1 == star_count && *mod == STAR)
-			*mod = va_arg(ap, int);
-		else
-			va_arg(ap, int);
+		flags[i] = str[i];
 		i++;
 	}
-}	
+	flags[i] = '\0';
+	return (flags);
+}
 
 void get_modval(va_list ap, char *flags, int *mod, int *mod2)
 {
@@ -111,17 +78,12 @@ int	print_variable(va_list ap, int *skip, char *str)
 	int		count;
 
 	count = 0;
+	mod[0] = 0;
 	mod[1] = 0;
-	flags = get_flags(str + 1, skip, &mod[0]);
-	if (strrchr(flags, '.'))
-	{
-		mod[0] = 0;
+	flags = get_flags(str + 1, skip);
 		get_modval(ap, flags, &mod[0], &mod[1]);
-	}
-	else
-		read_stars(ap, flags, &mod[0]);
 	if (ft_strrchr("dDuUixXoO", *(str + *skip)))
-		count += print_number(ap, flags, str + *skip, mod[0]);
+		count += print_number(ap, flags, str + *skip, mod);
 	else if (ft_strrchr("cCsSp%", *(str + *skip)))
 		count += print_chars(ap, flags, str + *skip, mod);
 	else if (str[*skip])

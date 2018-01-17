@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/17 11:56:59 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/01/17 14:29:34 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ dt_unsigned_num_flags.c \
 print_chars.c \
 libft/ft_strlen.c \
 libft/ft_strdup.c \
+libft/ft_strcmp.c \
 
 OBJ = $(SRC:.c=.o)
 

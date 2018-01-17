@@ -3,29 +3,32 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-void print(char *str, ...)
-{
-	va_list ap;
-	int		i;
-	char	*d;
-	int		add;
+typedef int		(*p_balls)(int *);
 
-	i = 0;
-	va_start(ap, str);
-	while (str[i])
-	{
-		if (str[i] == '%')
-		{
-			d= va_arg(ap, char *);
-			add = (int)d;
-			ft_strdebug(d, "str");
-		}
-		i++;
-	}
-	va_end(ap);
+typedef	struct	s_balls
+{
+	p_balls ball;
+}				t_balls;
+
+int		ballacher(int mod[2]);
+
+//t_balls g_tab = {&ballacher};
+
+int		ballacher(int mod[2])
+{
+	ft_intdebug(mod[0], "mod[0]");
+	ft_intdebug(mod[1], "mod[1]");
+	return (0);
 }
 
 int main()
 {
-	print("% %");
+	int mod[2];
+	t_balls ballin;
+
+	ballin.ball = &ballacher;
+	
+	mod[0] = 1;	
+	mod[1] = 2;
+	ballin.ball(mod);
 }

@@ -6,45 +6,16 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:05:55 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/16 21:56:08 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 15:51:13 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	mod_is_zero(char *flags)
-{
-	int	i;
-	int	found_number;
-	int	num;
-
-	found_number = 0;
-	i = 0;
-	num = 0;
-	while (flags[i] && found_number != 1)
-	{
-		if (flags[i] == '.')
-			while (flags[i])
-			{
-				if (flags[i] >= '0' && flags[i] <= '9')
-				{
-					num = ft_atoi(flags + i);
-					found_number = 1;
-				}
-				i++;
-			}
-		i++;
-	}
-	return ((num == 0) ? 1 : 0);
-}
-
-int dt_num_zero_case(int space_type, char *flags, int plus)
+int dt_num_zero_case(int space_type, int mod, int plus)
 {
 	int	count;
-	int	mod;
-	int	mod2;
 
-	get_mod_values(flags, &mod, &mod2);
 	count = 0;
 	if (plus != 1 && mod == 0 && space_type == ' ')
 	{
@@ -62,35 +33,6 @@ int dt_num_zero_case(int space_type, char *flags, int plus)
 		while (mod > count++)
 			ft_putchar(' ');
 	return (count);
-}
-
-void get_mod_values(char *flags, int *mod, int *mod2)
-{
-	int	i;
-
-	*mod = 0;
-	*mod2 = 0;
-	i = 0;
-	while (flags[i] != '.')
-	{
-		if (flags[i] >= '0' && flags[i] <= '9')
-		{
-			*mod = ft_atoi(flags + i);
-			while (flags[i] <= '9' && flags[i] >= '0')
-				i++;
-		}
-		else
-			i++;
-	}
-	while (flags[i])
-	{
-		if (flags[i] <= '9' && flags[i] >= '0')
-		{
-			*mod2 = ft_atoi(flags+ i);
-			break ;
-		}
-		i++;
-	}
 }
 
 int	dec_mod2_greater_print(int plus, int mod2, long long num)

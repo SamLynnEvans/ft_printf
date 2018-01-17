@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 13:27:51 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 16:04:05 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,18 +130,18 @@ t_print_dt_num	g_dot_num_tab[] =
 	{"X", "H", &pf_dot_hh_hex_upper},
 	{"o", "H", &pf_dot_hh_octal},
 	{"O", "H", &pf_dot_hh_octal},
-	{"u", "h", &pf_dot_unsigned_short_decimal},
-	{"U", "h", &pf_dot_unsigned_short_decimal},
-	{"u", "H", &pf_dot_unsigned_hh_decimal},
-	{"U", "H", &pf_dot_unsigned_hh_decimal},
-	{"u", "l", &pf_dot_unsigned_decimal},
-	{"U", "l", &pf_dot_unsigned_decimal},
-	{"u", "j", &pf_dot_unsigned_decimal},
-	{"U", "j", &pf_dot_unsigned_decimal},
-	{"u", "L", &pf_dot_unsigned_decimal},
-	{"U", "L", &pf_dot_unsigned_decimal},
-	{"u", "z", &pf_dot_unsigned_decimal},
-	{"U", "z", &pf_dot_unsigned_decimal},
+	{"u", "h", &pf_dot_unsigned_short},
+	{"U", "h", &pf_dot_unsigned_short},
+	{"u", "H", &pf_dot_unsigned_hh},
+	{"U", "H", &pf_dot_unsigned_hh},
+	{"u", "l", &pf_dot_unsigned_long},
+	{"U", "l", &pf_dot_unsigned_long},
+	{"u", "j", &pf_dot_unsigned_long},
+	{"U", "j", &pf_dot_unsigned_long},
+	{"u", "L", &pf_dot_unsigned_long},
+	{"U", "L", &pf_dot_unsigned_long},
+	{"u", "z", &pf_dot_unsigned_long},
+	{"U", "z", &pf_dot_unsigned_long},
 	{"u", "0", &pf_dot_unsigned_decimal},
 	{"U", "0", &pf_dot_unsigned_decimal},
 };
@@ -200,7 +200,7 @@ long long	get_num(va_list ap, int int_size)
 	return (va_arg(ap, uintmax_t));
 }
 
-int	print_number(va_list ap, char *flags, char *c, int mod)
+int	print_number(va_list ap, char *flags, char *c, int mod[2])
 {
 	int		j;
 	char	int_size;
@@ -208,18 +208,18 @@ int	print_number(va_list ap, char *flags, char *c, int mod)
 	int_size = get_int_size(flags);
 	j = 0;
 	if (*c == 'U')
-		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, mod));
+		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, mod[0]));
 	if (ft_strrchr(flags, '.'))
 		while (j < 63)
 		{
 			if (*c == *g_dot_num_tab[j].c && int_size == *g_dot_num_tab[j].int_size)
-				return (g_dot_num_tab[j].print(get_num(ap, int_size), flags));
+				return (g_dot_num_tab[j].print(get_num(ap, int_size), flags, mod));
 			j++;
 		}
 	while (j < 63)
 	{
 		if (*c == *g_pf_num_tab[j].c && int_size == *g_pf_num_tab[j].int_size)
-			return (g_pf_num_tab[j].print(get_num(ap, int_size), flags, mod));
+			return (g_pf_num_tab[j].print(get_num(ap, int_size), flags, mod[0]));
 		j++;
 	}
 	return (0);
