@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 23:39:23 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/16 15:02:35 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/16 15:39:53 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	pf_dot_unsigned_decimal(long long n, char *flags)
 	unsigned long long	num;
 
 	num  = (unsigned long long)n;
-	num_l = get_num_length(num, DECIMAL);
+	num_l = get_unum_length(num, DECIMAL);
 	get_mod_values(flags, &mod[0], &mod[1]);
 	space_type = get_space_type(flags);
 	if (mod[1] == 0 && num == 0)
@@ -32,7 +32,7 @@ int	pf_dot_unsigned_decimal(long long n, char *flags)
 		return (num_l + 1);
 	}
 	if (mod[1] >= mod[0])
-		return (dec_mod2_greater_print_us(mod[0], num));
+		return (dec_mod2_greater_print_us(mod[1], num));
 	else if (space_type != '-')
 		return (dec_dot_space_print_us(mod[0], mod[1], num));
 	else
@@ -47,7 +47,7 @@ int	pf_dot_unsigned_short_decimal(long long n, char *flags)
 	unsigned short	num;
 	
 	num  = (unsigned short)n;
-	num_l = get_num_length(num, DECIMAL);
+	num_l = get_unum_length(num, DECIMAL);
 	get_mod_values(flags, &mod[0], &mod[1]);
 	space_type = get_space_type(flags);
 	if (mod[1] == 0 && num == 0)
@@ -59,7 +59,7 @@ int	pf_dot_unsigned_short_decimal(long long n, char *flags)
 		return (num_l + 1);
 	}
 	if (mod[1] >= mod[0])
-		return (dec_mod2_greater_print_us(mod[0], num));
+		return (dec_mod2_greater_print_us(mod[1], num));
 	else if (space_type != '-')
 		return (dec_dot_space_print_us(mod[0], mod[1], num));
 	else
@@ -74,7 +74,7 @@ int	pf_dot_unsigned_hh_decimal(long long n, char *flags)
 	unsigned char	num;
 	
 	num  = (unsigned char)n;
-	num_l = get_num_length(num, DECIMAL);
+	num_l = get_unum_length(num, DECIMAL);
 	get_mod_values(flags, &mod[0], &mod[1]);
 	space_type = get_space_type(flags);
 	if (mod[1] == 0 && num == 0)
@@ -86,7 +86,7 @@ int	pf_dot_unsigned_hh_decimal(long long n, char *flags)
 		return (num_l + 1);
 	}
 	if (mod[1] >= mod[0])
-		return (dec_mod2_greater_print_us(mod[0], num));
+		return (dec_mod2_greater_print_us(mod[1], num));
 	else if (space_type != '-')
 		return (dec_dot_space_print_us(mod[0], mod[1], num));
 	else

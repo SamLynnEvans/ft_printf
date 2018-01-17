@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/15 23:50:36 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/01/17 11:56:59 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ long_printers.c \
 longlong_printers.c \
 short_printers.c \
 hh_printers.c \
-print_chars.c \
 libft/ft_intdebug.c \
 dt_int_printers.c \
 dt_dec_num_flags.c \
@@ -40,7 +39,9 @@ dt_short_printers.c \
 dt_hh_printers.c \
 dt_unsigned.c \
 dt_unsigned_num_flags.c \
-
+print_chars.c \
+libft/ft_strlen.c \
+libft/ft_strdup.c \
 
 OBJ = $(SRC:.c=.o)
 

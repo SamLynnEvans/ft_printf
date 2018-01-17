@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 22:38:52 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/16 15:02:46 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/16 15:44:07 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	pf_dot_short_decimal(long long n, char *flags)
 		return (num_l + 1);
 	}
 	if (mod[1] >= mod[0])
-		return (dec_mod2_greater_print(plus, mod[0], num));
+		return (dec_mod2_greater_print(plus, mod[1], num));
 	else if (space_type != '-')
 		return (dec_dot_space_print(plus, mod[0], mod[1], num));
 	return (dec_dot_lft_adj_print(plus, mod[0], mod[1], num));
@@ -106,7 +106,7 @@ int	pf_dot_short_octal(long long n, char *flags)
 	num_l = (num >= 0) ? get_num_length(num, OCTAL) : (sizeof(short) * 8) / 3 + 1;
 	space_type = (ft_strrchr(flags, '-')) ? '-' : '0';
 	precision = (ft_strrchr(flags, '#') && num != 0) ? 1 : 0;
-	if (mod_is_zero(flags) && num == 0)
+	if (mod_is_zero(flags) && num == 0 && !(ft_strrchr(flags, '#')))
 		return (dt_num_zero_case(space_type, flags, 0));
 	if (space_type != '-')
 	{

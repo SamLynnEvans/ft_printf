@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/16 15:11:00 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 13:27:51 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,20 @@ t_print_dt_num	g_dot_num_tab[] =
 	{"X", "H", &pf_dot_hh_hex_upper},
 	{"o", "H", &pf_dot_hh_octal},
 	{"O", "H", &pf_dot_hh_octal},
+	{"u", "h", &pf_dot_unsigned_short_decimal},
+	{"U", "h", &pf_dot_unsigned_short_decimal},
+	{"u", "H", &pf_dot_unsigned_hh_decimal},
+	{"U", "H", &pf_dot_unsigned_hh_decimal},
+	{"u", "l", &pf_dot_unsigned_decimal},
+	{"U", "l", &pf_dot_unsigned_decimal},
+	{"u", "j", &pf_dot_unsigned_decimal},
+	{"U", "j", &pf_dot_unsigned_decimal},
+	{"u", "L", &pf_dot_unsigned_decimal},
+	{"U", "L", &pf_dot_unsigned_decimal},
+	{"u", "z", &pf_dot_unsigned_decimal},
+	{"U", "z", &pf_dot_unsigned_decimal},
+	{"u", "0", &pf_dot_unsigned_decimal},
+	{"U", "0", &pf_dot_unsigned_decimal},
 };
 
 char	read_count(int count[4])
@@ -196,13 +210,13 @@ int	print_number(va_list ap, char *flags, char *c, int mod)
 	if (*c == 'U')
 		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, mod));
 	if (ft_strrchr(flags, '.'))
-		while (j < 100)
+		while (j < 63)
 		{
 			if (*c == *g_dot_num_tab[j].c && int_size == *g_dot_num_tab[j].int_size)
 				return (g_dot_num_tab[j].print(get_num(ap, int_size), flags));
 			j++;
 		}
-	while (j < 100)
+	while (j < 63)
 	{
 		if (*c == *g_pf_num_tab[j].c && int_size == *g_pf_num_tab[j].int_size)
 			return (g_pf_num_tab[j].print(get_num(ap, int_size), flags, mod));

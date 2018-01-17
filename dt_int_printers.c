@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 23:49:24 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/16 15:03:22 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/16 15:45:17 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	pf_dot_int_hex_upper(long long n, char *flags)
 	num_l = (num >= 0) ? get_num_length(num, HEXA) : (sizeof(int) * 8) / 4;
 	precision = (ft_strrchr(flags, '#') && num != 0) ? 2 : 0;
 	space_type = (ft_strrchr(flags, '-')) ? '-' : '0';
-	if (mod_is_zero(flags) && num == 0)
+	if (mod_is_zero(flags) && num == 0 && !(ft_strrchr(flags, '#')))
 		return (dt_num_zero_case(space_type, flags, 0));
 	if (space_type != '-')
 	{
@@ -105,7 +105,7 @@ int	pf_dot_int_octal(long long n, char *flags)
 	num_l = (num >= 0) ? get_num_length(num, OCTAL) : (sizeof(int) * 8) / 3 + 1;
 	space_type = (ft_strrchr(flags, '-')) ? '-' : '0';
 	precision = (ft_strrchr(flags, '#') && num != 0) ? 1 : 0;
-	if (mod_is_zero(flags) && num == 0)
+	if (mod_is_zero(flags) && num == 0 && !(ft_strrchr(flags, '#')))
 		return (dt_num_zero_case(space_type, flags, 0));
 	if (space_type != '-')
 	{

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/16 15:20:43 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 13:36:56 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 # define DECIMAL 10
 # define HEXA 16
 # define OCTAL 8
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define YELLOW  "\x1b[33m"
+#define BLUE    "\x1b[34m"
+#define MAGENTA "\x1b[35m"
+#define CYAN    "\x1b[36m"
+#define RESET   "\x1b[0m"
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -26,6 +33,12 @@
 typedef int		(*p_num)(long long, char *, int);
 typedef int		(*p_dt_num)(long long, char *);
 typedef void	(*p_chars)(char *, char *);
+
+typedef struct	s_print_colour
+{
+	char *colour;
+	char *print_c;
+}				t_print_colour;
 
 typedef struct	s_print_num
 {
@@ -48,6 +61,9 @@ typedef struct	s_print_chars
 }				t_print_chars;
 
 int	dec_mod2_greater_print_us(int mod2, unsigned long long num);
+int	print_pointer(long long *p, char *flags, int mod);
+int	print_string(char *str, char *flags, int mod[2]);
+int	print_char(char c, char *flags, int mod[2]);
 int dt_num_zero_case(int space_type, char *flags, int plus);
 int	mod_is_zero(char *flags);
 int dec_dot_space_print_us(int mod, int mod2, unsigned long long num);
@@ -122,11 +138,9 @@ int	pf_hh_hex_upper(long long n, char *flags, int mod);
 int	pf_hh_octal(long long n, char *flags, int mod);
 int	pf_hh_unsigned(long long num, char *flags, int mod);
 int	print_number(va_list ap, char *flags, char *c, int mod);
-void	pf_putchar(char *str, char *flags);
 void	pf_putnbr(long long n);
 void	pf_putnbr_unsigned(unsigned long long n);
-void	pf_putstr(char *str, char *flags);
-void	print_chars(char *prnt_str, char *flags, char *c, int star);
+int	print_chars(va_list ap, char *flags, char *c, int mod[2]);
 void	print_left_adj(int spaces);
 
 #endif
