@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:01 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 17:36:34 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 22:26:59 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	pf_l_decimal(long long num, char *flags, int mod)
 		num_length += put_sign(plus, flags);
 	pf_putnbr(num);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -54,7 +54,7 @@ int	pf_l_hex_lower(long long num, char *flags, int mod)
 		num_length += print_precision(HEXA, 0);
 	ft_putbase(num, HEXA, sizeof(long) * 8, 0);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -78,7 +78,7 @@ int	pf_l_hex_upper(long long num, char *flags, int mod)
 		num_length+= print_precision(HEXA, 1);
 	ft_putbase(num, HEXA, sizeof(long) * 8, 1);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -102,6 +102,6 @@ int	pf_l_octal(long long num, char *flags, int mod)
 		num_length += print_precision(OCTAL, 0);
 	ft_putbase(num, OCTAL, sizeof(long) * 8, 0);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }

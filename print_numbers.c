@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 17:56:15 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 12:09:41 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_print_num			g_pf_num_tab[] =
 	{"d", "0", &pf_int_decimal},
 	{"D", "0", &pf_int_decimal},
 	{"i", "0", &pf_int_decimal},
+	{"b", "0", &pf_int_binary},
 	{"x", "0", &pf_int_hex_lower},
 	{"X", "0", &pf_int_hex_upper},
 	{"o", "0", &pf_int_octal},
@@ -209,14 +210,14 @@ int	print_number(va_list ap, char *flags, char *c, int mod[2])
 	j = 0;
 	if (*c == 'U')
 		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, mod[0]));
-	if (ft_strrchr(flags, '.'))
+	if (ft_strrchr(flags, '.') && mod[1] >= 0)
 		while (j < 63)
 		{
 			if (*c == *g_dot_num_tab[j].c && int_size == *g_dot_num_tab[j].int_size)
 				return (g_dot_num_tab[j].print(get_num(ap, int_size), flags, mod));
 			j++;
 		}
-	while (j < 63)
+	while (j < 64)
 	{
 		if (*c == *g_pf_num_tab[j].c && int_size == *g_pf_num_tab[j].int_size)
 			return (g_pf_num_tab[j].print(get_num(ap, int_size), flags, mod[0]));

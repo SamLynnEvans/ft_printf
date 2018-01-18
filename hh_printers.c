@@ -32,7 +32,7 @@ int	pf_hh_decimal(long long n, char *flags, int mod)
 		num_length += put_sign(plus, flags);
 	pf_putnbr(num);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -58,7 +58,7 @@ int	pf_hh_hex_lower(long long n, char *flags, int mod)
 		num_length += print_precision(HEXA, 0);
 	ft_putbase(num, HEXA, sizeof(char) * 8, 0);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -84,7 +84,7 @@ int	pf_hh_hex_upper(long long n, char *flags, int mod)
 		num_length += print_precision(HEXA, 1);
 	ft_putbase(num, HEXA, sizeof(char) * 8, 1);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -110,6 +110,6 @@ int	pf_hh_octal(long long n, char *flags, int mod)
 		num_length += print_precision(OCTAL, 0);
 	ft_putbase(num, OCTAL, sizeof(char) * 8, 0);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }

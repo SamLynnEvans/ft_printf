@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 22:05:16 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 23:19:32 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ int	dec_print_zeroes(int zeroes, int plus, char *flags)
 	int	nl_mod;
 
 	nl_mod = zeroes;
-	if (ft_strrchr(flags, ' '))
+	if (ft_strrchr(flags, ' ') && plus == 0)
 	{
 		ft_putchar(' ');
 		zeroes--;
-	}
+	}	
 	if (plus == -1)
 	{
 		ft_putchar('-');

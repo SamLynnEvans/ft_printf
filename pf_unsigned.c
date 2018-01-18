@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 17:10:28 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 14:30:44 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 22:33:34 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	pf_int_unsigned(long long n, char *flags, int mod)
 		   ft_putchar('0');	
 	pf_putnbr(num);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -54,7 +54,7 @@ int	pf_long_unsigned(long long n, char *flags, int mod)
 		   ft_putchar('0');	
 	pf_putnbr_unsigned(num);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -77,7 +77,7 @@ int	pf_ll_unsigned(long long n, char *flags, int mod)
 		   ft_putchar('0');	
 	pf_putnbr_unsigned(num);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -100,7 +100,7 @@ int	pf_short_unsigned(long long n, char *flags, int mod)
 		   ft_putchar('0');	
 	pf_putnbr_unsigned(num);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 
@@ -123,6 +123,6 @@ int	pf_hh_unsigned(long long n, char *flags, int mod)
 		   ft_putchar('0');	
 	pf_putnbr_unsigned(num);
 	if (space_type == '-')
-		print_left_adj(mod - num_length);
+		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }

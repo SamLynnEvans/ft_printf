@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 19:25:15 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 22:20:16 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 23:43:16 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ int	dt_print_str(char *str, char *flags, int mod[2])
 	char	space_type;
 	int		o_mod;
 	int		len;
-	
+	int		null;
+
+	null = (str == NULL) ? 1 : 0;
+	if (null)
+		str = ft_strdup("(null)");	
 	len = ft_strlen(str);
 	len = (mod[1] < len) ? mod[1] : len;
 	o_mod = mod[0];
@@ -38,6 +42,8 @@ int	dt_print_str(char *str, char *flags, int mod[2])
 	if (space_type == '-')
 		while (mod[0]-- > len)
 			ft_putchar(' ');
+	if (null)
+		free(str);
 	return ((o_mod > len) ? o_mod : len);
 }
 
@@ -90,9 +96,9 @@ int	print_char(char c, char *flags, int mod)
 
 	space_type = get_space_type(flags);	
 	if (space_type != '-')
-		print_spaces(mod - len);
+		print_spaces(mod - 1);
 	ft_putchar(c);
 	if (space_type == '-')
-		print_spaces(mod - len);
+		print_spaces(mod - 1);
 	return ((mod > 1) ? mod : 1);
 }

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:05:55 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 17:31:40 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 12:14:50 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int	dec_mod2_greater_print(int plus, int mod2, long long num, int num_length)
 int dec_dot_space_print(int plus, int mod[2], int num_length, long long num)	
 {
 	int		count;
-	
+	int		sign_put;
+
 	count = mod[0];
 	mod[0] -= (plus == -1 || plus == 1) ? 1 : 0;
 	while (mod[0] > mod[1] && mod[0] > num_length)
@@ -72,11 +73,11 @@ int dec_dot_space_print(int plus, int mod[2], int num_length, long long num)
 		ft_putchar(' ');
 		mod[0]--;
 	}
-	print_sign(plus);	
+	sign_put = print_sign(plus);	
 	while (mod[1]-- > num_length)
 		ft_putchar('0');
 	pf_putnbr(num);
-	return ((num_length > count) ? num_length : count);
+	return ((num_length + sign_put > count) ? num_length + sign_put : count);
 }
 
 int	dec_dot_lft_adj_print(int plus, int mod[2], char *flags, long long num)

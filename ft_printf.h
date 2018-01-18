@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 22:20:28 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 11:57:51 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define DECIMAL 10
 # define HEXA 16
 # define OCTAL 8
+# define BINARY 2
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
 #define YELLOW  "\x1b[33m"
@@ -68,6 +69,7 @@ typedef struct	s_print_chars
 }				t_print_chars;
 
 char	get_space_type(char *flags);
+int pf_int_binary(long long n, char *flags, int mod);
 void	int_putchar(int c);
 int	dt_print_str(char *str, char *flags, int mod[2]);
 int	ft_putstr_unicode(int *str, char *flags, int mod);
@@ -87,9 +89,9 @@ int		pf_long_unsigned(long long n, char *flags, int mod);
 int		print_precision(int base, int caps);
 int		put_sign(int plus, char *flags);
 int		dec_dot_lft_adj_print(int plus, int mod[2], char *flags, long long num);
-int		dec_dot_lft_adj_print_us(int mod, int mod2, unsigned long long num);
+int		dec_dot_lft_adj_print_us(int mod[2], unsigned long long num, int num_l);
 int		dec_mod2_greater_print(int plus, int mod2, long long num, int num_l);
-int		dec_mod2_greater_print_us(int mod2, unsigned long long num);
+int		dec_mod2_greater_print_us(int mod2, unsigned long long num, int num_l);
 int		non_dec_dot_leftadj_print1(int num_l, int mod, int base, int caps);
 int		non_dec_dot_leftadj_print1_uc(int num_l, int mod, int base, int precision);
 int		non_dec_dot_leftadj_print2(int num_l, int mod, int count);
@@ -147,7 +149,7 @@ int		print_number(va_list ap, char *flags, char *c, int mod[2]);
 int		print_pointer(long long *p, char *flags, int mod);
 int		print_string(char *str, char *flags, int mod);
 int 	dec_dot_space_print(int plus, int mod[2], int num_l, long long num);
-int 	dec_dot_space_print_us(int mod, int mod2, unsigned long long num);
+int 	dec_dot_space_print_us(int mod[2], unsigned long long num, int num_l);
 int 	dt_num_zero_case(int space_type, int mod, int plus);
 int 	get_precision(int base);
 void	ft_pf_percent(char *str, char *flags);

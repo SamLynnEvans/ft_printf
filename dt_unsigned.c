@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 23:39:23 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 16:00:37 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 23:26:37 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	pf_dot_unsigned_decimal(long long n, char *flags, int mod[2])
 		return (num_l + 1);
 	}
 	if (mod[1] >= mod[0])
-		return (dec_mod2_greater_print_us(mod[1], num));
+		return (dec_mod2_greater_print_us(mod[1], num, num_l));
 	else if (space_type != '-')
-		return (dec_dot_space_print_us(mod[0], mod[1], num));
+		return (dec_dot_space_print_us(mod, num, num_l));
 	else
-		return (dec_dot_lft_adj_print_us(mod[0], mod[1], num));
+		return (dec_dot_lft_adj_print_us(mod, num, num_l));
 }
 
 int	pf_dot_unsigned_long(long long n, char *flags, int mod[2])
@@ -55,11 +55,11 @@ int	pf_dot_unsigned_long(long long n, char *flags, int mod[2])
 		return (num_l + 1);
 	}
 	if (mod[1] >= mod[0])
-		return (dec_mod2_greater_print_us(mod[1], num));
+		return (dec_mod2_greater_print_us(mod[1], num, num_l));
 	else if (space_type != '-')
-		return (dec_dot_space_print_us(mod[0], mod[1], num));
+		return (dec_dot_space_print_us(mod, num, num_l));
 	else
-		return (dec_dot_lft_adj_print_us(mod[0], mod[1], num));
+		return (dec_dot_lft_adj_print_us(mod, num, num_l));
 }
 
 int	pf_dot_unsigned_short(long long n, char *flags, int mod[2])
@@ -80,11 +80,11 @@ int	pf_dot_unsigned_short(long long n, char *flags, int mod[2])
 		return (num_l + 1);
 	}
 	if (mod[1] >= mod[0])
-		return (dec_mod2_greater_print_us(mod[1], num));
+		return (dec_mod2_greater_print_us(mod[1], num, num_l));
 	else if (space_type != '-')
-		return (dec_dot_space_print_us(mod[0], mod[1], num));
+		return (dec_dot_space_print_us(mod, num, num_l));
 	else
-		return (dec_dot_lft_adj_print_us(mod[0], mod[1], num));
+		return (dec_dot_lft_adj_print_us(mod, num, num_l));
 }
 
 int	pf_dot_unsigned_hh(long long n, char *flags, int mod[2])
@@ -105,9 +105,9 @@ int	pf_dot_unsigned_hh(long long n, char *flags, int mod[2])
 		return (num_l + 1);
 	}
 	if (mod[1] >= mod[0])
-		return (dec_mod2_greater_print_us(mod[1], num));
+		return (dec_mod2_greater_print_us(mod[1], num, num_l));
 	else if (space_type != '-')
-		return (dec_dot_space_print_us(mod[0], mod[1], num));
+		return (dec_dot_space_print_us(mod, num, num_l));
 	else
-		return (dec_dot_lft_adj_print_us(mod[0], mod[1], num));
+		return (dec_dot_lft_adj_print_us(mod, num, num_l));
 }

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 18:57:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/17 22:13:15 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/17 22:37:48 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,6 @@ t_print_uc g_print_uc_tab[] =
 	{3, &print_uc_three_byte},
 	{4, &print_uc_four_byte},
 };
-
-void	int_putchar(int c)
-{
-	write(1, &c, 1);
-}
-
-void	print_uc_two_byte(int c)
-{
-	unsigned char x[2];
-
-	x[0] = 192 | ((1984 & c) >> 6);
-	x[1] = 128 | (63 & c);
-	write(1, x, 2);
-}
-
-void	print_uc_three_byte(int c)
-{
-	unsigned char 	x[3];
-
-	x[0] = 224 | ((61440 & c) >> 12);
-	x[1] = 128 | ((4032 & c) >> 6);
-	x[2] = 128 | (63 & c);
-	write(1, x, 3);
-}
-
-void	print_uc_four_byte(int c)
-{
-	unsigned char x[4];
-
-	x[0] = 240 | ((1835008 & c) >> 18);
-	x[1] = 128 | ((258048 & c) >> 12);
-	x[2] = 128 | ((4032 & c) >> 6);
-	x[3] = 128 | (63 & c);
-	write(1, x, 4);
-}
 
 int	unicode_strlen(int *str)
 {
@@ -84,9 +49,9 @@ int	ft_putstr_unicode(int *str, char *flags, int mod)
 	if (str == NULL)
 		return (print_string(NULL, flags, mod));
 	space_type = get_space_type(flags);
+	len = unicode_strlen(str);
 	if (space_type != '-' && mod > len)
 		print_spaces(mod - len);
-	len = unicode_strlen(str);
 	while (*str != '\0')
 	{
 		if (*str < 127 && *str >= 0)
