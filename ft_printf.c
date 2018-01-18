@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 22:16:21 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 12:12:50 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 12:27:12 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void get_modval(va_list ap, char *flags, int *mod, int *mod2)
 int	print_chars(va_list ap, char *flags, char *c, int mod[2])
 {
 	if (ft_strrchr(flags, '.') && mod[1] == 0)
+	{
+		print_spaces(mod[0]);
 		return (mod[0]);
+	}
 	else if (*c == 'S' || (*c == 's' && ft_strrchr(flags, 'l')))
 		return (ft_putstr_unicode(va_arg(ap, int *), flags, mod[0]));
 	else if (*c == 'C' || (*c == 'c' && ft_strrchr(flags, 'l')))
