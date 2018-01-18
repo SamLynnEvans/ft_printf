@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:45:10 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 20:03:22 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 23:10:33 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	rc_putbase_upper(long long num, int base)
 	}
 }
 
-void	ft_print_output(char *output, int output_len, int base)
+void	ft_print_output(char *output, int output_len, int base, long long num)
 {
 	int	first_letter;
 
@@ -43,7 +43,12 @@ void	ft_print_output(char *output, int output_len, int base)
 	while (output_len >= 0)
 	{
 		if (base == OCTAL && first_letter)
-			ft_putchar((output_len < 21) ? '3' : '1');
+		{
+			if (output_len == 2 && num >= -64 && num <= 0) 
+				ft_putchar('3');
+			else
+				ft_putchar('8' - output[output_len] + '0');
+		}
 		else
 			ft_putchar(output[output_len]);
 		first_letter = 0;
@@ -77,7 +82,7 @@ void	neg_base_printer(long long num, int base, int int_size, int caps)
 		}
 		output[count[1]++] = (caps) ? g_hexa_uc[bitmask] : g_hexa[bitmask];
 	}
-	ft_print_output(output, count[1], base);
+	ft_print_output(output, count[1], base, num);
 }
 
 void	ft_putbase(long long num, int base, int int_size, int caps)

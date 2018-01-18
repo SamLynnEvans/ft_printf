@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 19:33:01 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 19:50:56 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 22:05:28 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	pf_l_octal(long long num, char *flags, int mod)
 	p = (num == 0) ? 0 : p;
 	space_type = get_space_type(flags);
 	if (num < 0)
-		num_length = (sizeof(long) * 8) / 3;
+		num_length = (sizeof(long) * 8) / 3 + 1;
 	if (space_type == ' ' || !(space_type))
 		num_length += nondec_print_spaces(mod - num_length, OCTAL, p, 0);
 	if (space_type == '0')

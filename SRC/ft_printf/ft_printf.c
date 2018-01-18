@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 22:16:21 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 19:21:19 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 22:02:54 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		print_variable(va_list ap, int *skip, char *str)
 	mod[0] = (mod[0] < 0) ? mod[0] * -1 : mod[0];
 	if (*(str + *skip) == '\0')
 		*skip = 0;
-	if (ft_strrchr("dDuUixXoOb", *(str + *skip)))
+	else if (ft_strrchr("dDuUixXoOb", *(str + *skip)))
 		count += print_number(ap, flags, str + *skip, mod);
 	else if (ft_strrchr("cCsSp%", *(str + *skip)))
 		count += print_chars(ap, flags, str + *skip, mod);
@@ -111,7 +111,7 @@ int		print_variable(va_list ap, int *skip, char *str)
 	{
 		print_spaces(mod[0] - 1);
 		*skip = *skip - 1;
-		count = mod[0] - 1;
+		count = (mod[0] > 0) ? mod[0] - 1 : 0;
 	}
 	free(flags);
 	return (count);
