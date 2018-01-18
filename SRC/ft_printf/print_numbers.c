@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 19:36:34 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 21:29:39 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_print_num			g_n_tab[] =
 	{"i", "h", &pf_short_decimal},
 	{"X", "h", &pf_short_hex_upper},
 	{"o", "h", &pf_short_octal},
-	{"O", "h", &pf_short_octal},
+	{"O", "h", &pf_ll_octal},
 	{"u", "h", &pf_short_unsigned},
 	{"U", "h", &pf_ll_unsigned},
 	{"d", "H", &pf_hh_decimal},
@@ -75,7 +75,7 @@ t_print_num			g_n_tab[] =
 	{"i", "H", &pf_hh_decimal},
 	{"X", "H", &pf_hh_hex_upper},
 	{"o", "H", &pf_hh_octal},
-	{"O", "H", &pf_hh_octal},
+	{"O", "H", &pf_ll_octal},
 	{"u", "H", &pf_hh_unsigned},
 	{"U", "H", &pf_ll_unsigned},
 };
@@ -123,14 +123,14 @@ t_print_dt_num		g_dtab[] =
 	{"x", "h", &pf_dot_short_hex_lower},
 	{"X", "h", &pf_dot_short_hex_upper},
 	{"o", "h", &pf_dot_short_octal},
-	{"O", "h", &pf_dot_short_octal},
+	{"O", "h", &pf_dot_ll_octal},
 	{"d", "H", &pf_dot_hh_decimal},
 	{"D", "H", &pf_dot_hh_decimal},
 	{"i", "H", &pf_dot_hh_decimal},
 	{"x", "H", &pf_dot_hh_hex_lower},
 	{"X", "H", &pf_dot_hh_hex_upper},
 	{"o", "H", &pf_dot_hh_octal},
-	{"O", "H", &pf_dot_hh_octal},
+	{"O", "H", &pf_dot_ll_octal},
 	{"u", "h", &pf_dot_unsigned_short},
 	{"U", "h", &pf_dot_unsigned_short},
 	{"u", "H", &pf_dot_unsigned_hh},

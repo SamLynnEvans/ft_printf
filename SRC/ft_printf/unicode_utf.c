@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 22:37:04 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 19:59:27 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 21:08:07 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,16 @@ void	print_uc_four_byte(int c)
 	x[2] = 128 | ((4032 & c) >> 6);
 	x[3] = 128 | (63 & c);
 	write(1, x, 4);
+}
+
+void	ft_unicode_putchar(int c)
+{
+		if (c < 127 && c >= 0)
+			ft_putchar(c);
+		if (c > 127 && c < 2047)
+			print_uc_two_byte(c);
+		if (c > 2047 && c < 65535)
+			print_uc_three_byte(c);
+		if (c > 65536 && c < 1112064)
+			print_uc_four_byte(c);
 }

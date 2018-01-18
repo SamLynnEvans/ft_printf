@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 18:57:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 19:53:55 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/18 21:03:50 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_putstr_unicode(int *str, char *flags, int mod)
 	if (space_type != '-' && mod > len)
 		print_spaces(mod - len);
 	while (*str != '\0')
-	{
+	{	
 		if (*str < 127 && *str >= 0)
 			ft_putchar(*str);
 		if (*str > 127 && *str < 2047)
