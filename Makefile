@@ -6,59 +6,139 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/17 22:42:35 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/01/18 18:02:38 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = int_printers.c \
-ft_pf_percent.c \
-ft_pf_string.c \
-ft_printf.c \
-ft_putchar.c \
-ft_putstr.c \
-print_numbers.c \
-ft_atoi.c \
-ft_strrchr.c \
-get_num_length.c \
-num_flags.c \
-ft_putbase.c \
-pf_putnbr.c \
-pf_unsigned.c \
-long_printers.c \
-longlong_printers.c \
-short_printers.c \
-hh_printers.c \
-libft/ft_intdebug.c \
-dt_int_printers.c \
-dt_dec_num_flags.c \
-dt_nondec_num_flags.c \
-dt_ll_printers.c \
-dt_short_printers.c \
-dt_hh_printers.c \
-dt_unsigned.c \
-dt_unsigned_num_flags.c \
-print_chars.c \
-libft/ft_strlen.c \
-libft/ft_strdup.c \
-libft/ft_strcmp.c \
-ft_strjoin_free.c \
-unicode.c \
-unicode_utf.c \
+SRC_PATH = SRC
 
-OBJ = $(SRC:.c=.o)
+SRC_NAME = ft_printf/dt_dec_num_flags.c \
+ft_printf/dt_hh_printers.c \
+ft_printf/dt_int_printers.c \
+ft_printf/dt_ll_printers.c \
+ft_printf/dt_nondec_num_flags.c \
+ft_printf/dt_short_printers.c \
+ft_printf/dt_unsigned.c \
+ft_printf/dt_unsigned_num_flags.c \
+ft_printf/ft_printf.c \
+ft_printf/ft_putbase.c \
+ft_printf/hh_printers.c \
+ft_printf/int_printers.c \
+ft_printf/long_printers.c \
+ft_printf/longlong_printers.c \
+ft_printf/nondec_num_flags.c \
+ft_printf/num_flags.c \
+ft_printf/pf_putnbr.c \
+ft_printf/pf_unsigned.c \
+ft_printf/print_chars.c \
+ft_printf/print_colours.c \
+ft_printf/print_numbers.c \
+ft_printf/short_printers.c \
+ft_printf/unicode.c \
+ft_printf/unicode_utf.c \
+libft/ft_atoi.c \
+libft/ft_bzero.c \
+libft/ft_intdebug.c \
+libft/ft_isalnum.c \
+libft/ft_isalpha.c \
+libft/ft_isascii.c \
+libft/ft_isdigit.c \
+libft/ft_isprint.c \
+libft/ft_itoa.c \
+libft/ft_lstadd.c \
+libft/ft_lstaddend.c \
+libft/ft_lstdel.c \
+libft/ft_lstdelone.c \
+libft/ft_lstiter.c \
+libft/ft_lstmap.c \
+libft/ft_lstnew.c \
+libft/ft_lstnew_ptr.c \
+libft/ft_lsttstr_del.c \
+libft/ft_memalloc.c \
+libft/ft_memccpy.c \
+libft/ft_memchr.c \
+libft/ft_memcmp.c \
+libft/ft_memcpy.c \
+libft/ft_memdel.c \
+libft/ft_memmove.c \
+libft/ft_memset.c \
+libft/ft_print_list.c \
+libft/ft_power.c \
+libft/ft_putchar.c \
+libft/ft_putchar_fd.c \
+libft/ft_putendl.c \
+libft/ft_putendl_fd.c \
+libft/ft_putnbr.c \
+libft/ft_putnbr_fd.c \
+libft/ft_putstr.c \
+libft/ft_putstr_fd.c \
+libft/ft_putstrn.c \
+libft/ft_strcat.c \
+libft/ft_strchr.c \
+libft/ft_strclr.c \
+libft/ft_strcmp.c \
+libft/ft_strcpy.c \
+libft/ft_strdebug.c \
+libft/ft_strdel.c \
+libft/ft_strdup.c \
+libft/ft_strequ.c \
+libft/ft_striter.c \
+libft/ft_striteri.c \
+libft/ft_strjoin.c \
+libft/ft_strjoin_free.c \
+libft/ft_strlcat.c \
+libft/ft_strlen.c \
+libft/ft_strmap.c \
+libft/ft_strmapi.c \
+libft/ft_strncat.c \
+libft/ft_strncmp.c \
+libft/ft_strncpy.c \
+libft/ft_strnequ.c \
+libft/ft_strnew.c \
+libft/ft_strnstr.c \
+libft/ft_strrchr.c \
+libft/ft_strsplit.c \
+libft/ft_strstr.c \
+libft/ft_strsub.c \
+libft/ft_strtrim.c \
+libft/ft_tolower.c \
+libft/ft_toupper.c \
+libft/get_num_length.c \
+get_next_line/get_next_line.c \
+
+CPPFLAGS = -I Includes
+
+FLAGS = -Wall -Wextra -Werror
+
+OBJ_NAME = $(SRC_NAME:.c=.o)
+
+OBJ_PATH = obj
+
+DEPS = Includes/libft.h \
+Includes/ft_printf.h \
+Includes/get_next_line.h \
 
 NAME = libftprintf.a
+
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -c -Wall -Wextra -Werror $(SRC) -Ift_printf.h -Ilibft.h -g
-	ar rc $(NAME) $(OBJ)
+	ar rc $@ $^
 
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(DEPS)
+	@mkdir -p $(OBJ_PATH)
+	@mkdir -p $(dir $(OBJ))
+	gcc $(FLAGS) -o $@ -c $< $(CPPFLAGS)
+	
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_PATH)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+

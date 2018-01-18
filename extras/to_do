@@ -1,2 +1,0 @@
-- rewrite num_flags for octal/hex and ints seperately
-- as there are issues when using 0 and spacing with negative numbers with hex/octal
