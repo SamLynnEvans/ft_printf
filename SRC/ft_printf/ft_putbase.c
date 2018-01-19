@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:45:10 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 23:10:33 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/19 01:13:26 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	rc_putbase_upper(long long num, int base)
 	}
 }
 
-void	ft_print_output(char *output, int output_len, int base, long long num)
+void	ft_print_output(char *output, int output_len)
 {
 	int	first_letter;
 
@@ -42,15 +42,7 @@ void	ft_print_output(char *output, int output_len, int base, long long num)
 	output_len--;
 	while (output_len >= 0)
 	{
-		if (base == OCTAL && first_letter)
-		{
-			if (output_len == 2 && num >= -64 && num <= 0) 
-				ft_putchar('3');
-			else
-				ft_putchar('8' - output[output_len] + '0');
-		}
-		else
-			ft_putchar(output[output_len]);
+		ft_putchar(output[output_len]);
 		first_letter = 0;
 		output_len--;
 	}
@@ -73,6 +65,7 @@ void	neg_base_printer(long long num, int base, int int_size, int caps)
 	{
 		bitmask = 0;
 		count[0] = 0;
+		mask_width = (base == OCTAL && x + 3 >= int_size) ? mask_width - (3 - (int_size % 3)) : mask_width;
 		while (count[0] < mask_width)
 		{
 			if ((num & 1UL << x))
@@ -82,7 +75,7 @@ void	neg_base_printer(long long num, int base, int int_size, int caps)
 		}
 		output[count[1]++] = (caps) ? g_hexa_uc[bitmask] : g_hexa[bitmask];
 	}
-	ft_print_output(output, count[1], base, num);
+	ft_print_output(output, count[1]);
 }
 
 void	ft_putbase(long long num, int base, int int_size, int caps)
