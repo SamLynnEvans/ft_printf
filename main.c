@@ -16,10 +16,8 @@ int main(int ac, char **av)
 	ret2 = printf("%U\n", ULLONG_MAX);
 	ft_printf("my return value = %#d\n", ret1);
 	ft_printf("pf return value = %#d\n", ret2);
-/*ft_putchar('\n');
-	ret1 =	ft_printf("% 03d\n", 0);
-	ret2 =	printf("% 03d\n", 0);
-	ft_printf("my return value = %#12.3d\n", ret1);
+ft_putchar('\n');
+	ft_printf("my return value = %#d\n", ret1);
 	ft_printf("pf return value = %#d\n", ret2);
 	ret1 =	ft_printf("%#12.23o\n", INT_MAX);
 	ret2 =	printf("%#12.23o\n", INT_MAX);
@@ -41,5 +39,5 @@ int main(int ac, char **av)
 	ret2 =	printf("%18.19X\n", -1234213);
 	ft_printf("my return value = %#d\n", ret1);
 	ft_printf("pf return value = %#d\n", ret2);
-*/
+
 }

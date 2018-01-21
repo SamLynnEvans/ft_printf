@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 22:01:39 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 22:08:05 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 22:53:33 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	pf_signed(long long num, char *flags, int mod, int base)
 	if (int_size == sizeof(char) || int_size == sizeof(short))
 		num = shorten_number(num, int_size);
 	p = (base == DECIMAL || num != 0) ? get_precision(flags, base, num) : 0;
-	num_length = get_num_length2(num, base, int_size);
+	num_length = ft_numlen(num, base, int_size);
 	space_type = bit_space_type(flags);
 	if (!p && base == DECIMAL && (space_type & SPACE))
 		num_length += print_spaces(1);
@@ -67,7 +67,8 @@ int	pf_unsigned(unsigned long long num, char *flags, int mod[2], int dot)
 	size = get_int_size(flags);
 	if (size != sizeof(long long))
 		num = ushorten_num(num, size);
-	num_l = (mod[1] == 0 && num == 0 && dot) ? 0 : get_unum_length(num, DECIMAL);
+	num_l = (mod[1] == 0 && num == 0 && dot) ?
+	0 : ft_unumlen(num);
 	count = num_l;
 	space_type = bit_space_type(flags);
 	if (!(space_type & MINUS) && (dot || !(space_type & ZERO)))
@@ -96,7 +97,7 @@ int	pf_dot_signed(long long num, char *flags, int mod[2], int base)
 	size = get_int_size(flags);
 	if (size == sizeof(char) || size == sizeof(short))
 		num = shorten_number(num, size);
-	num_l = (mod[1] == 0 && num == 0) ? 0 : get_num_length2(num, base, size);
+	num_l = (mod[1] == 0 && num == 0) ? 0 : ft_numlen(num, base, size);
 	count = num_l;
 	space_type = bit_space_type(flags);
 	p = (base == DECIMAL || num != 0 || (base == OCTAL && mod[1] == 0)) ?

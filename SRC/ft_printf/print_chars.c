@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 19:25:15 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 22:38:13 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 22:54:23 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	print_pointer(long long *p, char *flags, int mod)
 
 	o_mod = mod;
 	address = (long)p;
-	num_length = get_num_length(address, HEXA);
+	num_length = ft_numlen(address, 16, sizeof(long));
 	space_type = bit_space_type(flags);
 	if (!(space_type & MINUS))
 		while (mod-- > num_length + 2)

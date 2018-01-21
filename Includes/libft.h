@@ -6,12 +6,18 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 11:52:39 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 22:21:24 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 22:55:58 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define DECIMAL 10
+# define HEXA 16
+# define HEXA_UPPER 17
+# define OCTAL 8
+# define OCTAL_UPPER 9
+# define BINARY 2
 
 # include <string.h>
 # include <stdlib.h>
@@ -24,6 +30,9 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+
+int					ft_numlen(long long num, int base, size_t size);
+int					ft_unumlen(unsigned long long num);
 void				ft_unicode_putchar(int c);
 int					ft_power(int num, int power);
 char				*ft_lsttstr_del(t_list **list);
