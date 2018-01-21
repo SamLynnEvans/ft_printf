@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 23:12:29 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 14:18:05 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,15 @@ t_print_num			g_n_tab[] =
 	{"U", "H", &pf_ll_unsigned},
 };
 
+t_print_nondec		g_ndectab[] =
+{
+	{'0', &pf_int_nondecprint},
+	{'h', &pf_short_nondecprint},
+	{'H', &pf_hh_nondecprint},
+	{'L', &pf_long_nondecprint},
+};
+
+
 t_print_dt_num		g_dtab[] =
 {
 	{"d", "0", &pf_dot_int_decimal},
@@ -149,14 +158,8 @@ t_print_dt_num		g_dtab[] =
 
 char					read_count(int count[4])
 {
-	if (count[2] >= 1)
-		return ('j');
-	if (count[0] >= 2)
+	if (count[2] || count[0] || count[3])
 		return ('L');
-	if (count[3] >= 1)
-		return ('z');
-	if (count[0] == 1)
-		return ('l');
 	if (count[1] >= 2)
 		return ('H');
 	if (count[1] == 1)
@@ -164,11 +167,13 @@ char					read_count(int count[4])
 	return ('0');
 }
 
-char					get_int_size(char *flags)
+char					get_int_size(char *flags, char *c)
 {
 	int	count[4];
 	int	i;
 
+	if (*c == 'D' || *c == 'O')
+		return ('L');
 	i = 0;
 	while (i < 4)
 		count[i++] = 0;
@@ -188,10 +193,8 @@ char					get_int_size(char *flags)
 	return (read_count(count));
 }
 
-long long				get_num(va_list ap, int int_size, char *c)
+long long				get_num(va_list ap, int int_size)
 {
-	if (*c == 'O' || *c == 'D')
-		return (va_arg(ap, long long));
 	if (int_size == '0' || int_size == 'h' || int_size == 'H')
 		return (va_arg(ap, int));
 	if (int_size == 'l')
@@ -203,27 +206,52 @@ long long				get_num(va_list ap, int int_size, char *c)
 	return (va_arg(ap, uintmax_t));
 }
 
+int	get_base(char *c)
+{
+	if (*c == 'x')
+		return (HEXA);
+	if (*c == 'X')
+		return (HEXA_UPPER);
+	if (*c == 'O')
+		return (OCTAL_UPPER);
+	if (*c == 'o')
+		return (OCTAL);
+	if (*c == 'b' || *c == 'B')
+		return (BINARY);
+	return (DECIMAL);
+}
+
 int						print_number(va_list ap,
 char *flags, char *c, int mod[2])
 {
 	int		j;
 	char	int_size;
-
-	int_size = get_int_size(flags);
+	int 	base;
+	
+	base = get_base(c);
+	int_size = get_int_size(flags, c);
 	j = 0;
 	if (*c == 'U')
 		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, mod[0]));
+	if (!(ft_strrchr(flags, '.')) && *c != 'u')
+	while (j < 4)
+	{
+		if (int_size == g_ndectab[j].int_size)
+			return (g_ndectab[j].print(get_num(ap, int_size), flags, mod[0], base));
+		j++;
+	}
+	j = 0;
 	if (ft_strrchr(flags, '.') && mod[1] >= 0)
 		while (j < 63)
 		{
 			if (*c == *g_dtab[j].c && int_size == *g_dtab[j].int_size)
-				return (g_dtab[j].print(get_num(ap, int_size, c), flags, mod));
+				return (g_dtab[j].print(get_num(ap, int_size), flags, mod));
 			j++;
 		}
 	while (j < 64)
 	{
 		if (*c == *g_n_tab[j].c && int_size == *g_n_tab[j].int_size)
-			return (g_n_tab[j].print(get_num(ap, int_size, c), flags, mod[0]));
+			return (g_n_tab[j].print(get_num(ap, int_size), flags, mod[0]));
 		j++;
 	}
 	return (0);

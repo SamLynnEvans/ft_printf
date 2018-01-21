@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 15:22:52 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 13:52:03 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # define FLAG_CHARACTERS str[i] == '.' || str[i] == '#' || str[i] == '+' || str[i] == '-' || str[i] == ' ' || str[i] == '0' || str[i] == 'j' || str[i] == 'l' || str[i] == 'z' || str[i] == 'h' || str[i] == '*' || (str[i] <= '9' && str[i] >= '0')
 # define DECIMAL 10
 # define HEXA 16
+# define HEXA_UPPER 17
 # define OCTAL 8
+# define OCTAL_UPPER 9
 # define BINARY 2
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
@@ -34,6 +36,7 @@ typedef int		(*p_num)(long long, char *, int);
 typedef int		(*p_dt_num)(long long, char *, int *);
 typedef void	(*p_chars)(char *, char *);
 typedef	void	(*p_unicode)(int);
+typedef	int		(*p_nondec)(long long, char *, int, int);
 
 typedef struct	s_print_uc
 {
@@ -54,6 +57,12 @@ typedef struct	s_print_num
 	p_num		print; 
 }				t_print_num;
 
+typedef struct	s_print_nondec
+{
+	char		int_size;
+	p_nondec	print; 
+}				t_print_nondec;
+
 typedef struct	s_print_dt_num
 {
 	char		*c;
@@ -67,6 +76,12 @@ typedef struct	s_print_chars
 	p_chars		print; 
 }				t_print_chars;
 
+
+int	pf_short_nondecprint(long long n, char *flags, int mod, int base);
+int	pf_hh_nondecprint(long long n, char *flags, int mod, int base);
+int	pf_long_nondecprint(long long n, char *flags, int mod, int base);
+int		get_precision(char *flags, int base, long long num);
+int		pf_int_nondecprint(long long n, char *flags, int mod, int base);
 char	get_space_type(char *flags);
 int	print_colour(char *str, int *skip);
 int pf_int_binary(long long n, char *flags, int mod);
@@ -82,6 +97,7 @@ int		dec_print_spaces(int spaces, char is_space, int plus);
 int		dec_print_zeroes(int zeroes, int plus, char *flags);
 int		ft_printf(char *str, ...);
 int		get_num_length(long long num, int base);
+int		get_num_length2(long long num, int base, size_t size);
 int		get_unum_length(unsigned long long num, int base);
 int		pf_dot_int_decimal(long long num, char *flags, int mod[2]);
 int		pf_dot_int_hex_lower(long long n, char *flags, int mod[2]);
@@ -151,7 +167,6 @@ int		print_string(char *str, char *flags, int mod);
 int 	dec_dot_space_print(int plus, int mod[2], int num_l, long long num);
 int 	dec_dot_space_print_us(int mod[2], unsigned long long num, int num_l);
 int 	dt_num_zero_case(int space_type, int mod, int plus);
-int 	get_precision(int base);
 void	ft_pf_percent(char *str, char *flags);
 void	ft_pf_string(char *str, char *flags);
 void	ft_putbase(long long num, int base, int filler, int caps);

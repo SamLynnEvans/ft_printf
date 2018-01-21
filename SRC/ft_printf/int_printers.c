@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 15:54:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 21:39:17 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 14:45:44 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,114 @@ int	pf_int_decimal(long long num, char *flags, int mod)
 	else if (space_type == '-' && num != 0)
 		num_length += put_sign(plus, flags);
 	pf_putnbr(num);
+	if (space_type == '-')
+		print_spaces(mod - num_length);
+	return (mod > num_length) ? mod : num_length;
+}
+
+int	pf_int_nondecprint(long long num, char *flags, int mod, int base)
+{
+	char	space_type;
+	int		p;
+	int		num_length;
+
+	p = (base == DECIMAL || num != 0) ? get_precision(flags, base, num) : 0;
+	num_length = get_num_length2(num, base, sizeof(int));
+	space_type = get_space_type(flags);
+	if (!p && base == DECIMAL && (space_type == '-' || num_length >= mod) && ft_strrchr(flags, ' '))
+	{
+		ft_putchar(' ');
+		num_length++;
+	}	
+	else if (space_type == ' ' || !(space_type))
+		num_length += nondec_print_spaces(mod - num_length, base, p, 0);
+	else if (space_type == '0')
+		num_length += nondec_print_zeroes(mod - num_length, base, p, 0);
+	else if (p && space_type == '-')
+		num_length += print_precision(base, p);
+	ft_putbase(num, base, sizeof(int) * 8, 0);
+	if (space_type == '-')
+		print_spaces(mod - num_length);
+	return (mod > num_length) ? mod : num_length;
+}
+
+int	pf_short_nondecprint(long long n, char *flags, int mod, int base)
+{
+	short	num;
+	char	space_type;
+	int		p;
+	int		num_length;
+
+	num = (short)n;
+	p = (base != DECIMAL || num != 0) ? get_precision(flags, base, num) : 0;
+	num_length = get_num_length2(num, base, sizeof(short));
+	space_type = get_space_type(flags);
+	if (!p && base == DECIMAL && (space_type == '-' || num_length >= mod) && ft_strrchr(flags, ' '))
+	{
+		ft_putchar(' ');
+		num_length++;
+	}	
+	if (space_type == ' ' || !(space_type))
+		num_length += nondec_print_spaces(mod - num_length, base, p, 0);
+	if (space_type == '0')
+		num_length += nondec_print_zeroes(mod - num_length, base, p, 0);
+	if (p && space_type == '-')
+		num_length += print_precision(base, p);
+	ft_putbase(num, base, sizeof(short) * 8, 0);
+	if (space_type == '-')
+		print_spaces(mod - num_length);
+	return (mod > num_length) ? mod : num_length;
+}
+
+int	pf_hh_nondecprint(long long n, char *flags, int mod, int base)
+{
+	char	num;
+	char	space_type;
+	int		p;
+	int		num_length;
+
+	num = (char)n;
+	p = (base != DECIMAL || num != 0) ? get_precision(flags, base, num) : 0;
+	num_length = get_num_length2(num, base, sizeof(char));
+	space_type = get_space_type(flags);
+	if (!p && base == DECIMAL && (space_type == '-' || num_length >= mod) && ft_strrchr(flags, ' '))
+	{
+		ft_putchar(' ');
+		num_length++;
+	}	
+	if (space_type == ' ' || !(space_type))
+		num_length += nondec_print_spaces(mod - num_length, base, p, 0);
+	if (space_type == '0')
+		num_length += nondec_print_zeroes(mod - num_length, base, p, 0);
+	if (p && space_type == '-')
+		num_length += print_precision(base, p);
+	ft_putbase(num, base, sizeof(char) * 8, 0);
+	if (space_type == '-')
+		print_spaces(mod - num_length);
+	return (mod > num_length) ? mod : num_length;
+}
+
+int	pf_long_nondecprint(long long num, char *flags, int mod, int base)
+{
+	char		space_type;
+	int			p;
+	int			num_length;
+
+	p = (base != DECIMAL || num != 0) ? get_precision(flags, base, num) : 0;
+	num_length = get_num_length2(num, base, sizeof(long long));
+	space_type = get_space_type(flags);
+	if (!p && base == DECIMAL && (space_type == '-' || num_length >= mod) && ft_strrchr(flags, ' '))
+	{
+		ft_putchar(' ');
+		num_length++;
+	}	
+	if (space_type == ' ' || !(space_type))
+		num_length += nondec_print_spaces(mod - num_length, base, p, 0);
+	if (space_type == '0')
+		num_length += nondec_print_zeroes(mod - num_length, base, p, 0);
+	if (p && space_type == '-')
+		num_length += print_precision(base, p);
+	ft_putbase(num, base, sizeof(long long) * 8, 0);
 	if (space_type == '-')
 		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;

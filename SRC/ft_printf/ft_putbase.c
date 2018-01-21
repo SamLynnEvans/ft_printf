@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:45:10 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/19 01:13:26 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 14:41:47 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 char	g_hexa[16] = "0123456789abcdef";
 char	g_hexa_uc[16] = "0123456789ABCDEF";
 
-void	rc_putbase_lower(long long num, int base)
+void	rc_putbase_lower(unsigned long long num, int base)
 {
 	if (num)
 	{
@@ -25,7 +25,7 @@ void	rc_putbase_lower(long long num, int base)
 	}
 }
 
-void	rc_putbase_upper(long long num, int base)
+void	rc_putbase_upper(unsigned long long num, int base)
 {
 	if (num)
 	{
@@ -80,9 +80,18 @@ void	neg_base_printer(long long num, int base, int int_size, int caps)
 
 void	ft_putbase(long long num, int base, int int_size, int caps)
 {
+	caps = 0;
+	if (base == HEXA_UPPER)
+	{
+		caps = 1;
+		base = HEXA;
+	}
+	if (num < 0 && base == DECIMAL)
+		num *= -1;
+	base = (base == OCTAL_UPPER) ? OCTAL : base;
 	if (num == 0)
 		ft_putchar('0');
-	if (num < 0)
+	if (num < 0 && base != DECIMAL)
 		neg_base_printer(num, base, int_size, caps);
 	else
 	{
