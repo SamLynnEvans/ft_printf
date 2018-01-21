@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 21:20:22 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 21:49:20 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct	s_print_chars
 }				t_print_chars;
 
 int	print_zeroes(int zeroes);
-int	pf_unsigned(unsigned long long n, char *flags, int mod[2]);
+int	pf_unsigned(unsigned long long n, char *flags, int mod[2], int dot);
 int	pf_ndt_unsigned(unsigned long long n, char *flags, int mod);
 int	dot_spaces(int num_l, int mod[2], int precision, int base);
 char					get_int_size(char *flags);

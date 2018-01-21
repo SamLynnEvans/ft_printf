@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 23:39:23 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 21:24:23 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 21:59:07 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static unsigned long long	ushorten_num(long long n, int size)
 	return (0);
 }
 
-int	pf_unsigned(unsigned long long num, char *flags, int mod[2])
+int	pf_unsigned(unsigned long long num, char *flags, int mod[2], int dot)
 {
 	char				space_type;
 	int					num_l;
@@ -33,13 +33,16 @@ int	pf_unsigned(unsigned long long num, char *flags, int mod[2])
 	size = get_int_size(flags);
 	if (size != sizeof(long long))
 		num = ushorten_num(num, size);
-	num_l = (mod[1] == 0 && num == 0) ? 0 : get_unum_length(num, DECIMAL);
+	num_l = (mod[1] == 0 && num == 0 && dot) ? 0 : get_unum_length(num, DECIMAL);
 	count = num_l;
 	space_type = bit_space_type(flags);
-	if (!(space_type & MINUS))
+	if (!(space_type & MINUS) && (dot || !(space_type & ZERO)))
 		count += dot_spaces(num_l, mod, 0, 10);
-	count += print_zeroes(mod[1] - num_l);
-	if (num == 0 && mod[1] != 0)
+	if (dot)
+		count += print_zeroes(mod[1] - num_l);
+	else if (space_type & ZERO)
+		count += print_zeroes(mod[0] - num_l);
+	if (num == 0 && (mod[1] != 0 || !dot))
 		ft_putchar('0');
 	else if (mod[1] != 0 || num != 0)
 		rc_putbase(num, DECIMAL);
