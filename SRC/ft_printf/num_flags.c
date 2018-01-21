@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 13:52:05 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 17:56:23 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,17 @@ int		dec_print_zeroes(int zeroes, int plus, char *flags)
 	return (nl_mod);
 }
 
-void	print_spaces(int spaces)
+int		print_spaces(int spaces)
 {
+	int	count;
+
+	count = 0;
 	while (spaces-- > 0)
+	{
 		ft_putchar(' ');
+		count++;
+	}
+	return (count);
 }
 
 int		put_sign(int plus, char *flags)

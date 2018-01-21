@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 15:54:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 16:09:33 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 17:55:25 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,16 @@ int	pf_int_nondecprint(long long num, char *flags, int mod, int base)
 	num_length = get_num_length2(num, base, int_size);
 	space_type = bit_space_type(flags);
 	if (!p && base == DECIMAL && (space_type & SPACE))
-	{
-		ft_putchar(' ');
-		num_length++;
-	}
+		num_length += print_spaces(1);
 	if (!(space_type & MINUS) && !(space_type & ZERO))
-		print_spaces(mod - (num_length + ((p == NEG) ? 1 : p)));
+		num_length += print_spaces(mod - (num_length + ((p == NEG) ? 1 : p)));
 	if (p)
 		num_length += print_precision(base, p);
 	if (space_type & ZERO && !(space_type & MINUS))
-		print_zeroes(mod - num_length);
+		num_length += print_zeroes(mod - num_length);
 	ft_putbase(num, base, int_size * 8, 0);
 	if (space_type & MINUS)
-		print_spaces(mod - num_length);
+		num_length += print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
 

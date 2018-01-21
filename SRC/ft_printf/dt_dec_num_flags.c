@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 17:05:55 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 19:25:00 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 17:14:22 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	print_sign(int plus)
 	return (1);
 }
 
-int			dt_num_zero_case(int space_type, int mod, int plus)
+int		dt_num_zero_case(int space_type, int mod, int plus)
 {
 	int	count;
 

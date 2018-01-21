@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 20:34:07 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 20:00:55 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 17:55:29 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	non_dec_dot_leftadj_print1(int num_l, int mod, int base, int precision)
 
 	count = 0;
 	if (precision)
-		count += print_precision(base, 0);
+		count += print_precision(base, precision);
 	while (mod-- > num_l)
 	{
 		count++;
@@ -33,7 +33,7 @@ int	non_dec_dot_leftadj_print1_uc(int num_l, int mod, int base, int precision)
 
 	count = 0;
 	if (precision)
-		count += print_precision(base, 1);
+		count += print_precision(base, precision);
 	while (mod-- > num_l)
 	{
 		count++;
@@ -64,7 +64,7 @@ int	non_dec_dot_spaceprint(int num_l, int mod[2], int base, int precision)
 		mod[0]--;
 	}
 	if (precision)
-		count += print_precision(base, 0);
+		count += print_precision(base, precision);
 	while (mod[1]-- > num_l)
 	{
 		count++;
@@ -85,7 +85,7 @@ int	non_dec_dot_spaceprint_uc(int num_l, int mod[2], int base, int precision)
 		mod[0]--;
 	}
 	if (precision)
-		count += print_precision(base, 1);
+		count += print_precision(base, precision);
 	while (mod[1]-- > num_l)
 	{
 		count++;

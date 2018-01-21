@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 15:30:47 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 18:28:05 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ typedef struct	s_print_chars
 	p_chars		print; 
 }				t_print_chars;
 
-void	print_zeroes(int zeroes);
+int	print_zeroes(int zeroes);
+int	pf_dot_all(long long num, char *flags, int mod[2], int base);
 char	bit_space_type(char *flags);
 int	pf_short_nondecprint(long long n, char *flags, int mod, int base);
 int	pf_hh_nondecprint(long long n, char *flags, int mod, int base);
@@ -177,7 +178,7 @@ void	ft_pf_string(char *str, char *flags);
 void	ft_putbase(long long num, int base, int filler, int caps);
 void	pf_putnbr(long long n);
 void	pf_putnbr_unsigned(unsigned long long n);
-void	print_spaces(int spaces);
+int	print_spaces(int spaces);
 void 	get_mod_values(char *flags, int *mod, int *mod2);
 
 #endif

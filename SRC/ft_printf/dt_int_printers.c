@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 23:49:24 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/19 12:00:10 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 19:37:21 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,107 @@ int	pf_dot_int_decimal(long long num, char *flags, int mod[2])
 	else if (space_type != '-')
 		return (dec_dot_space_print(plus, mod, num_l, num));
 	return (dec_dot_lft_adj_print(plus, mod, flags, num));
+}
+
+static long long	shorten_number(long long num, int int_size)
+{
+	if (int_size == sizeof(short))
+		return ((short)num);
+	return ((char)num);
+}
+
+static char					read_count(int count[4])
+{
+	if (count[2] || count[0] || count[3])
+		return (sizeof(long long));
+	if (count[1] >= 2)
+		return (sizeof(char));
+	if (count[1] == 1)
+		return (sizeof(short));
+	return (sizeof(int));
+}
+
+static char					get_int_size(char *flags)
+{
+	int	count[4];
+	int	i;
+
+	i = 0;
+	while (i < 4)
+		count[i++] = 0;
+	i = 0;
+	while (flags[i])
+	{
+		if (flags[i] == 'l')
+			count[0]++;
+		if (flags[i] == 'h')
+			count[1]++;
+		if (flags[i] == 'j')
+			count[2]++;
+		if (flags[i] == 'z')
+			count[3]++;
+		i++;
+	}
+	return (read_count(count));
+}
+
+int	dot_spaces(int num_l, int mod[2], int precision, int base)
+{
+	int	count;
+	int	min;
+
+	min = (mod[1] > num_l) ? mod[1] : num_l;
+	count = 0;
+	if (base == DECIMAL && precision)
+		precision = 1;
+	while (mod[0] > min + precision)
+	{
+		ft_putchar(' ');
+		mod[0]--;
+		count++;
+	}
+	return (count);
+}
+
+int	fs(char space_type, int count, int **mod)
+{
+	if (space_type & SPACE)
+	{
+		ft_putchar(' ');
+		if (*mod[1] > count)
+			*mod[0] = *mod[0] - 1;	
+		return (1);
+	}
+	return (0);
+}
+
+int	pf_dot_all(long long num, char *flags, int mod[2], int base)
+{
+	char	space_type;
+	int		num_l;
+	int		p;
+	int		size;
+	int		count;
+
+	size = get_int_size(flags);
+	if (size == sizeof(char) || size == sizeof(short))
+		num = shorten_number(num, size);
+	num_l = (mod[1] == 0 && num == 0) ? 0 : get_num_length2(num, base, size);
+	count = num_l;
+	space_type = bit_space_type(flags);
+	p = (base == DECIMAL || num != 0 || (base == OCTAL && mod[1] == 0)) ?
+	get_precision(flags, base, num) : 0;
+	count += (base == DECIMAL) ? fs(space_type, count, &mod) : 0;
+	if (!(space_type & MINUS))
+		count += dot_spaces(num_l, mod, p, base);
+	if (p)
+		count += print_precision(base, p);
+	count += print_zeroes(mod[1] - num_l);
+	if (mod[1] != 0 || num != 0)
+		ft_putbase(num, base, size * 8, 0);
+	if (space_type & MINUS)
+		count += print_spaces(mod[0] - count);
+	return (count);
 }
 
 int	pf_dot_int_hex_lower(long long n, char *flags, int mod[2])
