@@ -6,19 +6,11 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 18:57:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 21:03:50 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 22:36:44 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-t_print_uc g_print_uc_tab[] =
-{
-	{1, &int_putchar},
-	{2, &print_uc_two_byte},
-	{3, &print_uc_three_byte},
-	{4, &print_uc_four_byte},
-};
 
 int	unicode_strlen(int *str)
 {
@@ -47,23 +39,16 @@ int	ft_putstr_unicode(int *str, char *flags, int mod)
 
 	if (str == NULL)
 		return (print_string(NULL, flags, mod));
-	space_type = get_space_type(flags);
+	space_type = bit_space_type(flags);
 	len = unicode_strlen(str);
-	if (space_type != '-' && mod > len)
+	if (!(space_type & MINUS) && mod > len)
 		print_spaces(mod - len);
 	while (*str != '\0')
 	{	
-		if (*str < 127 && *str >= 0)
-			ft_putchar(*str);
-		if (*str > 127 && *str < 2047)
-			print_uc_two_byte(*str);
-		if (*str > 2047 && *str < 65535)
-			print_uc_three_byte(*str);
-		if (*str > 65536 && *str < 1112064)
-			print_uc_four_byte(*str);
+		ft_unicode_putchar(*str);
 		str++;
 	}
-	if (space_type == '-' && mod > len)
+	if ((space_type & MINUS) && mod > len)
 		print_spaces(mod - len);
 	return ((len > mod) ? len : mod);
 }
@@ -76,14 +61,12 @@ int	ft_putchar_uc_helper(int c, char *flags, int mod, int uc_size)
 
 	i = -1;
 	o_mod = mod;
-	space_type = get_space_type(flags);
-	if (space_type != '-')
+	space_type = bit_space_type(flags);
+	if (!(space_type & MINUS))
 		while (mod-- > uc_size)
 			ft_putchar(' ');
-	while (++i < 4)
-		if (g_print_uc_tab[i].uc_size == uc_size)
-			g_print_uc_tab[i].print(c);
-	if (space_type == '-')
+	ft_unicode_putchar(c);
+	if (space_type & MINUS)
 		while (mod-- > uc_size)
 			ft_putchar(' ');
 	return ((uc_size > o_mod) ? uc_size : o_mod);

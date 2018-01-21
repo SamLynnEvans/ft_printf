@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 11:52:39 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/19 00:49:10 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 22:21:24 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+void				ft_unicode_putchar(int c);
 int					ft_power(int num, int power);
 char				*ft_lsttstr_del(t_list **list);
 void 				ft_putstrn(char *str, int n);

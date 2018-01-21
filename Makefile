@@ -6,36 +6,20 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/18 18:02:38 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/01/21 22:26:48 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PATH = SRC
 
-SRC_NAME = ft_printf/dt_dec_num_flags.c \
-ft_printf/dt_hh_printers.c \
-ft_printf/dt_int_printers.c \
-ft_printf/dt_ll_printers.c \
-ft_printf/dt_nondec_num_flags.c \
-ft_printf/dt_short_printers.c \
-ft_printf/dt_unsigned.c \
-ft_printf/dt_unsigned_num_flags.c \
-ft_printf/ft_printf.c \
+SRC_NAME = ft_printf/ft_printf.c \
 ft_printf/ft_putbase.c \
-ft_printf/hh_printers.c \
-ft_printf/int_printers.c \
-ft_printf/long_printers.c \
-ft_printf/longlong_printers.c \
-ft_printf/nondec_num_flags.c \
 ft_printf/num_flags.c \
-ft_printf/pf_putnbr.c \
-ft_printf/pf_unsigned.c \
+ft_printf/num_flags_cont.c \
+ft_printf/num_printers.c \
 ft_printf/print_chars.c \
-ft_printf/print_colours.c \
 ft_printf/print_numbers.c \
-ft_printf/short_printers.c \
 ft_printf/unicode.c \
-ft_printf/unicode_utf.c \
 libft/ft_atoi.c \
 libft/ft_bzero.c \
 libft/ft_intdebug.c \
@@ -99,10 +83,9 @@ libft/ft_strnstr.c \
 libft/ft_strrchr.c \
 libft/ft_strsplit.c \
 libft/ft_strstr.c \
-libft/ft_strsub.c \
-libft/ft_strtrim.c \
 libft/ft_tolower.c \
 libft/ft_toupper.c \
+libft/ft_unicode_putchar.c \
 libft/get_num_length.c \
 get_next_line/get_next_line.c \
 

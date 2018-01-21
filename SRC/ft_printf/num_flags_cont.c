@@ -6,26 +6,11 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 13:57:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 17:58:11 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 22:10:39 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	nondec_print_zeroes(int zeroes, int base, int precision, int caps)
-{
-	int	nl_mod;
-
-	if (caps)
-		;
-	nl_mod = zeroes;
-	if (precision)
-		zeroes -= print_precision(base, precision);
-	nl_mod -= zeroes;
-	while (zeroes-- > 0)
-		ft_putchar('0');
-	return (nl_mod);
-}
 
 int	print_zeroes(int zeroes)
 {
@@ -36,6 +21,19 @@ int	print_zeroes(int zeroes)
 	{
 		count++;
 		ft_putchar('0');
+	}
+	return (count);
+}
+
+int		print_spaces(int spaces)
+{
+	int	count;
+
+	count = 0;
+	while (spaces-- > 0)
+	{
+		ft_putchar(' ');
+		count++;
 	}
 	return (count);
 }
@@ -59,7 +57,6 @@ char	bit_space_type(char *flags)
 	}
 	return (space_type);
 }
-
 
 int	get_precision(char *flags, int base, long long num)
 {
@@ -99,25 +96,5 @@ int	print_precision(int base, int precision)
 		ft_putstr("0x");
 	if (base == HEXA_UPPER)
 		ft_putstr("0X");
-	return (nl_mod);
-}
-
-
-int	nondec_print_spaces(int spaces, int base, int precision, int caps)
-{
-	int	nl_mod;
-
-	if (caps)
-		;
-	nl_mod = spaces;
-	if (base == DECIMAL && precision)
-		spaces--;
-	else
-		spaces -= precision; 
-	nl_mod -= spaces;
-	while (spaces-- > 0)
-		ft_putchar(' ');
-	if (precision)
-		print_precision(base, precision);
 	return (nl_mod);
 }
