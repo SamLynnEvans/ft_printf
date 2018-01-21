@@ -6,13 +6,12 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 13:52:03 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 15:30:47 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define STAR -1
 # define FLAG_CHARACTERS str[i] == '.' || str[i] == '#' || str[i] == '+' || str[i] == '-' || str[i] == ' ' || str[i] == '0' || str[i] == 'j' || str[i] == 'l' || str[i] == 'z' || str[i] == 'h' || str[i] == '*' || (str[i] <= '9' && str[i] >= '0')
 # define DECIMAL 10
 # define HEXA 16
@@ -20,6 +19,10 @@
 # define OCTAL 8
 # define OCTAL_UPPER 9
 # define BINARY 2
+#define ZERO 1
+#define SPACE 2
+#define MINUS 4
+#define NEG 4
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
 #define YELLOW  "\x1b[33m"
@@ -27,6 +30,7 @@
 #define MAGENTA "\x1b[35m"
 #define CYAN    "\x1b[36m"
 #define RESET   "\x1b[0m"
+
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -76,7 +80,8 @@ typedef struct	s_print_chars
 	p_chars		print; 
 }				t_print_chars;
 
-
+void	print_zeroes(int zeroes);
+char	bit_space_type(char *flags);
 int	pf_short_nondecprint(long long n, char *flags, int mod, int base);
 int	pf_hh_nondecprint(long long n, char *flags, int mod, int base);
 int	pf_long_nondecprint(long long n, char *flags, int mod, int base);

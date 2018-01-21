@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 15:54:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 14:45:44 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 16:09:33 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,74 @@ int	pf_int_decimal(long long num, char *flags, int mod)
 	return (mod > num_length) ? mod : num_length;
 }
 
+long long	shorten_number(long long num, int int_size)
+{
+	if (int_size == sizeof(short))
+		return ((short)num);
+	return ((char)num);
+}
+
+static char					read_count(int count[4])
+{
+	if (count[2] || count[0] || count[3])
+		return (sizeof(long long));
+	if (count[1] >= 2)
+		return (sizeof(char));
+	if (count[1] == 1)
+		return (sizeof(short));
+	return (sizeof(int));
+}
+
+static char					get_int_size(char *flags)
+{
+	int	count[4];
+	int	i;
+
+	i = 0;
+	while (i < 4)
+		count[i++] = 0;
+	i = 0;
+	while (flags[i])
+	{
+		if (flags[i] == 'l')
+			count[0]++;
+		if (flags[i] == 'h')
+			count[1]++;
+		if (flags[i] == 'j')
+			count[2]++;
+		if (flags[i] == 'z')
+			count[3]++;
+		i++;
+	}
+	return (read_count(count));
+}
+
 int	pf_int_nondecprint(long long num, char *flags, int mod, int base)
 {
 	char	space_type;
 	int		p;
 	int		num_length;
+	char	int_size;
 
+	int_size = get_int_size(flags);
+	if (int_size == sizeof(char) || int_size == sizeof(short))
+		num = shorten_number(num, int_size);
 	p = (base == DECIMAL || num != 0) ? get_precision(flags, base, num) : 0;
-	num_length = get_num_length2(num, base, sizeof(int));
-	space_type = get_space_type(flags);
-	if (!p && base == DECIMAL && (space_type == '-' || num_length >= mod) && ft_strrchr(flags, ' '))
+	num_length = get_num_length2(num, base, int_size);
+	space_type = bit_space_type(flags);
+	if (!p && base == DECIMAL && (space_type & SPACE))
 	{
 		ft_putchar(' ');
 		num_length++;
-	}	
-	else if (space_type == ' ' || !(space_type))
-		num_length += nondec_print_spaces(mod - num_length, base, p, 0);
-	else if (space_type == '0')
-		num_length += nondec_print_zeroes(mod - num_length, base, p, 0);
-	else if (p && space_type == '-')
+	}
+	if (!(space_type & MINUS) && !(space_type & ZERO))
+		print_spaces(mod - (num_length + ((p == NEG) ? 1 : p)));
+	if (p)
 		num_length += print_precision(base, p);
-	ft_putbase(num, base, sizeof(int) * 8, 0);
-	if (space_type == '-')
+	if (space_type & ZERO && !(space_type & MINUS))
+		print_zeroes(mod - num_length);
+	ft_putbase(num, base, int_size * 8, 0);
+	if (space_type & MINUS)
 		print_spaces(mod - num_length);
 	return (mod > num_length) ? mod : num_length;
 }
@@ -103,7 +149,7 @@ int	pf_hh_nondecprint(long long n, char *flags, int mod, int base)
 	{
 		ft_putchar(' ');
 		num_length++;
-	}	
+	}
 	if (space_type == ' ' || !(space_type))
 		num_length += nondec_print_spaces(mod - num_length, base, p, 0);
 	if (space_type == '0')

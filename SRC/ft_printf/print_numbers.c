@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 14:18:05 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 16:06:56 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,16 +230,19 @@ char *flags, char *c, int mod[2])
 	
 	base = get_base(c);
 	int_size = get_int_size(flags, c);
+	if (*c == 'D' || *c == 'O')
+		flags = ft_strjoin(flags, "ll");
 	j = 0;
 	if (*c == 'U')
 		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, mod[0]));
 	if (!(ft_strrchr(flags, '.')) && *c != 'u')
-	while (j < 4)
+		return (pf_int_nondecprint(get_num(ap, int_size), flags, mod[0], base));
+/*	while (j < 4)
 	{
 		if (int_size == g_ndectab[j].int_size)
 			return (g_ndectab[j].print(get_num(ap, int_size), flags, mod[0], base));
 		j++;
-	}
+	}*/
 	j = 0;
 	if (ft_strrchr(flags, '.') && mod[1] >= 0)
 		while (j < 63)

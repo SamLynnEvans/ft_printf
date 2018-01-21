@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 13:57:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 14:25:46 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 15:30:25 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,46 @@ int	nondec_print_zeroes(int zeroes, int base, int precision, int caps)
 		;
 	nl_mod = zeroes;
 	if (precision)
-	{
-		if (base == DECIMAL)
-			zeroes--;
-		else
-			zeroes -= precision;
-		if (base == DECIMAL)
-			ft_putchar((precision == 1) ? '+' : '-');
-		if (base == OCTAL || base == OCTAL_UPPER)
-			ft_putchar('0');
-		if (base == HEXA)
-			ft_putstr("0x");
-		if (base == HEXA_UPPER)
-			ft_putstr("0X");
-	}
+		zeroes -= print_precision(base, precision);
 	nl_mod -= zeroes;
 	while (zeroes-- > 0)
 		ft_putchar('0');
 	return (nl_mod);
 }
 
+void	print_zeroes(int zeroes)
+{
+	while (zeroes-- > 0)
+		ft_putchar('0');
+}
+
+char	bit_space_type(char *flags)
+{
+	char space_type;
+	int	i;
+
+	i = 0;
+	space_type = 0;
+	while (flags[i])
+	{
+		if (flags[i] == '-')
+			space_type |= MINUS;
+		else if (flags[i] == ' ')
+			space_type |= SPACE;
+		else if (flags[i] == '0' && !(ft_isdigit(flags[i - 1])))
+			space_type |= ZERO;
+		i++;
+	}
+	return (space_type);
+}
+
+
 int	get_precision(char *flags, int base, long long num)
 {
 	if (base == DECIMAL)
 	{
 		if (num < 0)
-			return (2);
+			return (NEG);
 		if (ft_strrchr(flags, '+'))
 			return (1);
 		return (0);
@@ -97,15 +111,6 @@ int	nondec_print_spaces(int spaces, int base, int precision, int caps)
 	while (spaces-- > 0)
 		ft_putchar(' ');
 	if (precision)
-	{
-		if (base == DECIMAL)
-			ft_putchar((precision == 1) ? '+' : '-');
-		if (base == OCTAL || base == OCTAL_UPPER)
-			ft_putchar('0');
-		if (base == HEXA)
-			ft_putstr("0x");
-		if (base == HEXA_UPPER)
-			ft_putstr("0X");
-	}
+		print_precision(base, precision);
 	return (nl_mod);
 }
