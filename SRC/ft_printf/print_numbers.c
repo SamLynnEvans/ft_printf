@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 18:21:00 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 21:29:14 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,21 +159,19 @@ t_print_dt_num		g_dtab[] =
 char					read_count(int count[4])
 {
 	if (count[2] || count[0] || count[3])
-		return ('L');
+		return (sizeof(long long));
 	if (count[1] >= 2)
-		return ('H');
+		return (sizeof(char));
 	if (count[1] == 1)
-		return ('h');
-	return ('0');
+		return (sizeof(short));
+	return (sizeof(int));
 }
 
-char					get_int_size(char *flags, char *c)
+char					get_int_size(char *flags)
 {
 	int	count[4];
 	int	i;
 
-	if (*c == 'D' || *c == 'O')
-		return ('L');
 	i = 0;
 	while (i < 4)
 		count[i++] = 0;
@@ -193,17 +191,11 @@ char					get_int_size(char *flags, char *c)
 	return (read_count(count));
 }
 
-long long				get_num(va_list ap, int int_size)
+long long				get_num(va_list ap, int size)
 {
-	if (int_size == '0' || int_size == 'h' || int_size == 'H')
+	if (size == sizeof(int) || size == sizeof(short) || size == sizeof(char))
 		return (va_arg(ap, int));
-	if (int_size == 'l')
-		return (va_arg(ap, long));
-	if (int_size == 'L')
-		return (va_arg(ap, long long));
-	if (int_size == 'z')
-		return (va_arg(ap, size_t));
-	return (va_arg(ap, uintmax_t));
+	return (va_arg(ap, long long));
 }
 
 int	get_base(char *c)
@@ -224,27 +216,33 @@ int	get_base(char *c)
 int						print_number(va_list ap,
 char *flags, char *c, int mod[2])
 {
-	int		j;
 	char	int_size;
 	int 	base;
 	
-	base = get_base(c);
-	int_size = get_int_size(flags, c);
-	if (*c == 'D' || *c == 'O')
+	if (*c == 'D' || *c == 'O' || *c == 'U')
 		flags = ft_strjoin(flags, "ll");
-	j = 0;
-	if (*c == 'U')
-		return (pf_long_unsigned(va_arg(ap, unsigned long), flags, mod[0]));
-	if (!(ft_strrchr(flags, '.')) && *c != 'u')
-		return (pf_int_nondecprint(get_num(ap, int_size), flags, mod[0], base));
-	if (*c != 'u')
-		return (pf_dot_all(get_num(ap, int_size), flags, mod, base));
+	base = get_base(c);
+	int_size = get_int_size(flags);
+	if (!(ft_strrchr(flags, '.')))
+	{
+		if (*c != 'u' && *c != 'U')
+			return (pf_int_nondecprint(get_num(ap, int_size), flags, mod[0], base));
+		else
+			return (pf_ndt_unsigned(va_arg(ap, unsigned long long), flags, mod[0]));
+	}
+	else
+	{
+		if (*c != 'u' && *c != 'U')
+			return (pf_dot_all(get_num(ap, int_size), flags, mod, base));
+		else
+			return (pf_unsigned(va_arg(ap, unsigned long long), flags, mod));
 		/*	while (j < 4)
 	{
 		if (int_size == g_ndectab[j].int_size)
 			return (g_ndectab[j].print(get_num(ap, int_size), flags, mod[0], base));
 		j++;
 	}*/
+	}/*
 	j = 0;
 	if (ft_strrchr(flags, '.') && mod[1] >= 0)
 		while (j < 63)
@@ -259,5 +257,6 @@ char *flags, char *c, int mod[2])
 			return (g_n_tab[j].print(get_num(ap, int_size), flags, mod[0]));
 		j++;
 	}
+	return (0);*/
 	return (0);
 }

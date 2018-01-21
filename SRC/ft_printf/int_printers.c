@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pf_decimal.c                                    :+:      :+:    :+:   */
+/*   int_printers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/05 15:54:38 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 17:55:25 by slynn-ev         ###   ########.fr       */
+/*   Created: 2018/01/21 20:51:05 by slynn-ev          #+#    #+#             */
+/*   Updated: 2018/01/21 20:52:39 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,41 +39,6 @@ long long	shorten_number(long long num, int int_size)
 	if (int_size == sizeof(short))
 		return ((short)num);
 	return ((char)num);
-}
-
-static char					read_count(int count[4])
-{
-	if (count[2] || count[0] || count[3])
-		return (sizeof(long long));
-	if (count[1] >= 2)
-		return (sizeof(char));
-	if (count[1] == 1)
-		return (sizeof(short));
-	return (sizeof(int));
-}
-
-static char					get_int_size(char *flags)
-{
-	int	count[4];
-	int	i;
-
-	i = 0;
-	while (i < 4)
-		count[i++] = 0;
-	i = 0;
-	while (flags[i])
-	{
-		if (flags[i] == 'l')
-			count[0]++;
-		if (flags[i] == 'h')
-			count[1]++;
-		if (flags[i] == 'j')
-			count[2]++;
-		if (flags[i] == 'z')
-			count[3]++;
-		i++;
-	}
-	return (read_count(count));
 }
 
 int	pf_int_nondecprint(long long num, char *flags, int mod, int base)

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:45:10 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 14:41:47 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 21:22:09 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 char	g_hexa[16] = "0123456789abcdef";
 char	g_hexa_uc[16] = "0123456789ABCDEF";
 
-void	rc_putbase_lower(unsigned long long num, int base)
+void	rc_putbase(unsigned long long num, int base)
 {
 	if (num)
 	{
-		rc_putbase_lower(num / base, base);
+		rc_putbase(num / base, base);
 		ft_putchar(g_hexa[num % base]);
 	}
 }
@@ -96,7 +96,7 @@ void	ft_putbase(long long num, int base, int int_size, int caps)
 	else
 	{
 		if (!caps)
-			rc_putbase_lower(num, base);
+			rc_putbase(num, base);
 		else
 			rc_putbase_upper(num, base);
 	}

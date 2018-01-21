@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 23:49:24 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 19:37:21 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 20:50:47 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,41 +44,6 @@ static long long	shorten_number(long long num, int int_size)
 	return ((char)num);
 }
 
-static char					read_count(int count[4])
-{
-	if (count[2] || count[0] || count[3])
-		return (sizeof(long long));
-	if (count[1] >= 2)
-		return (sizeof(char));
-	if (count[1] == 1)
-		return (sizeof(short));
-	return (sizeof(int));
-}
-
-static char					get_int_size(char *flags)
-{
-	int	count[4];
-	int	i;
-
-	i = 0;
-	while (i < 4)
-		count[i++] = 0;
-	i = 0;
-	while (flags[i])
-	{
-		if (flags[i] == 'l')
-			count[0]++;
-		if (flags[i] == 'h')
-			count[1]++;
-		if (flags[i] == 'j')
-			count[2]++;
-		if (flags[i] == 'z')
-			count[3]++;
-		i++;
-	}
-	return (read_count(count));
-}
-
 int	dot_spaces(int num_l, int mod[2], int precision, int base)
 {
 	int	count;
@@ -97,7 +62,7 @@ int	dot_spaces(int num_l, int mod[2], int precision, int base)
 	return (count);
 }
 
-int	fs(char space_type, int count, int **mod)
+static int	fs(char space_type, int count, int **mod)
 {
 	if (space_type & SPACE)
 	{
