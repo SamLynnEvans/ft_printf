@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 19:25:15 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 13:23:25 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 17:25:16 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,38 +85,40 @@ int	print_pointer(long long *p, char *flags, int mod)
 
 	o_mod = mod;
 	address = (long)p;
-	num_length = ft_numlen(address, 16, sizeof(long));
+	num_length = ft_numlen(address, 16, sizeof(long)) + 2;
 	space_type = bit_space_type(flags);
 	if (!(space_type & MINUS))
-		while (mod-- > num_length + 2)
+		while (mod-- > num_length)
 			ft_putchar(' ');
 	print_precision(HEXA, 0);
 	ft_putbase(address, HEXA, sizeof(long) * 8);
 	if (space_type & MINUS)
-		while (mod-- > num_length + 2)
+		while (mod-- > num_length)
 			ft_putchar(' ');
-	return ((o_mod > num_length + 2) ? o_mod : num_length + 2);
+	return ((o_mod > num_length) ? o_mod : num_length);
 }
 
-int	print_string(char *str, char *flags, int mod)
+int	print_string(char *str, char *flags, int mod[2])
 {
 	char	space_type;
 	int		len;
 	int		null;
 
+	if (ft_strrchr(flags, '.') && mod[1] >= 0)
+		return (dt_print_str(str, flags, mod));
 	null = (str == NULL) ? 1 : 0;
 	if (null)
 		str = ft_strdup("(null)");
 	len = ft_strlen(str);
 	space_type = bit_space_type(flags);
 	if (!(space_type & MINUS))
-		print_spaces(mod - len);
+		print_spaces(mod[0] - len);
 	ft_putstr(str);
 	if (space_type & MINUS)
-		print_spaces(mod - len);
+		print_spaces(mod[0] - len);
 	if (null)
 		free(str);
-	return ((mod > len) ? mod : len);
+	return ((mod[0] > len) ? mod[0] : len);
 }
 
 int	print_char(char c, char *flags, int mod)

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 22:16:21 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 15:33:57 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 18:11:31 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	*get_flags(char *str, int *skip)
 
 void	get_modval(va_list ap, char *flags, int *mod, int *mod2)
 {
-	mod[0] = 0;
-	mod[1] = 0;
+	*mod = 0;
+	*mod2 = 0;
 	while (*flags != '.' && *flags)
 	{
 		*mod = (*flags == '*') ? va_arg(ap, int) : *mod;
@@ -49,7 +49,7 @@ void	get_modval(va_list ap, char *flags, int *mod, int *mod2)
 	}
 	while (*flags)
 	{
-		*mod = (*flags == '*') ? va_arg(ap, int) : *mod;
+		*mod2 = (*flags == '*') ? va_arg(ap, int) : *mod2;
 		if (*flags <= '9' && *flags >= '0')
 		{
 			*mod2 = ft_atoi(flags);
@@ -60,30 +60,21 @@ void	get_modval(va_list ap, char *flags, int *mod, int *mod2)
 	}
 }
 
-int		print_chars(va_list ap, char *flags, char *c, int mod[2])
+int		print_chars(va_list ap, char *flags, char c, int mod[2])
 {
-	int	dot;
-	int	uc;
-
-	dot = (ft_strrchr(flags, '.')) ? 1 : 0;
-	uc = (ft_strrchr(flags, 'l')) ? 1 : 0;
-	if (uc && *c == 'c')
-		*c = 'C';
-	if (uc && *c == 's')
-		*c = 'S';	
-	if (*c == '%')
+	if (ft_strrchr(flags, 'l') && (c == 'c' || c == 's'))
+		c = c - 32;
+	if (c == '%')
 		return (print_char('%', flags, mod[0]));
-	else if (*c == 'S')
-		return (ft_putstr_unicode(va_arg(ap, int *), flags, mod[0]));
-	else if (*c == 'C')
+	else if (c == 'S')
+		return (ft_putstr_unicode(va_arg(ap, int *), flags, mod));
+	else if (c == 'C')
 		return (ft_putchar_unicode(va_arg(ap, int), flags, mod[0]));
-	else if (*c == 's' && dot)
-		return (dt_print_str(va_arg(ap, char *), flags, mod));
-	else if (*c == 's')
-		return (print_string(va_arg(ap, char *), flags, mod[0]));
-	else if (*c == 'c')
+	else if (c == 's')
+		return (print_string(va_arg(ap, char *), flags, mod));
+	else if (c == 'c')
 		return (print_char((char)(va_arg(ap, int)), flags, mod[0]));
-	else if (*c == 'p')
+	else if (c == 'p')
 		return (print_pointer(va_arg(ap, long long *), flags, mod[0]));
 	return (0);
 }
@@ -105,7 +96,7 @@ int		print_variable(va_list ap, int *skip, char *str)
 	else if (ft_strrchr("dDuUixXoOb", *(str + *skip)))
 		count += print_number(ap, &flags, str + *skip, mod);
 	else if (ft_strrchr("cCsSp%", *(str + *skip)))
-		count += print_chars(ap, flags, str + *skip, mod);
+		count += print_chars(ap, flags, *(str + *skip), mod);
 	else if (str[*skip])
 	{
 		print_spaces(mod[0] - 1);

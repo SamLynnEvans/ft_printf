@@ -12,7 +12,11 @@ int main(int ac, char **av)
 	int	f = -2123242;
 	int	i;
 	
-	ret1 =	ft_printf("% .s\n", "poo");
+	ret1 =	ft_printf("%ls\n", L"string");
+//	ret2 =	printf("%ls\n", L"string👺");
+	ft_printf("my return value = %#x\n", ret1);
+	ft_printf("pf return value = %#x\n", ret2);
+/*	ret1 =	ft_printf("% .s\n", "poo");
 	ret2 =	printf("% .s\n", "poo");
 	ft_printf("my return value = %#x\n", ret1);
 	ft_printf("pf return value = %#x\n", ret2);
@@ -48,5 +52,5 @@ int main(int ac, char **av)
 	ret2 =	printf("%18.19X\n", -1234213);
 	ft_printf("my return value = %#d\n", ret1);
 	ft_printf("pf return value = %#d\n", ret2);
-
+*/
 }

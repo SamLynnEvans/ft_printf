@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 18:57:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 23:37:04 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 16:17:59 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,27 @@ int	unicode_strlen(int *str)
 	return (count);
 }
 
-int	ft_putstr_unicode(int *str, char *flags, int mod)
+int	ft_putstr_unicode(int *str, char *flags, int mod[2])
 {
 	int	len;
 	int	space_type;
 
 	if (str == NULL)
 		return (print_string(NULL, flags, mod));
+	if (ft_strrchr(flags, '.') && mod[1] == 0)
+		*str = '\0';
 	space_type = bit_space_type(flags);
 	len = unicode_strlen(str);
-	if (!(space_type & MINUS) && mod > len)
-		print_spaces(mod - len);
+	if (!(space_type & MINUS) && mod[0] > len)
+		print_spaces(mod[0] - len);
 	while (*str != '\0')
 	{
 		ft_unicode_putchar(*str);
 		str++;
 	}
-	if ((space_type & MINUS) && mod > len)
-		print_spaces(mod - len);
-	return ((len > mod) ? len : mod);
+	if ((space_type & MINUS) && mod[0] > len)
+		print_spaces(mod[0] - len);
+	return ((len > mod[0]) ? len : mod[0]);
 }
 
 int	ft_putchar_uc_helper(int c, char *flags, int mod, int uc_size)

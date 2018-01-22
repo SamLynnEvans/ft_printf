@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 14:22:42 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 17:52:51 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			print_number(va_list ap, char **flags, char *c, int mod[2])
 	int		base;
 	int		dot;
 
-	dot = (ft_strrchr(*flags, '.')) ? 1 : 0;
+	dot = (ft_strrchr(*flags, '.') && mod[1] >= 0) ? 1 : 0;
 	if (*c == 'D' || *c == 'O' || *c == 'U')
 		*flags = ft_strjoin(*flags, "ll");
 	base = get_base(c);

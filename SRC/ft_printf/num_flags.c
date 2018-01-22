@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 15:13:57 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 15:48:10 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int	fs(char space_type, int count, int **mod)
 
 int	dot_precision(int base, int num, int mod[2], char *flags)
 {
-	ft_intdebug(mod[1], "mod[1]");
-	ft_intdebug(mod[0], "mod[0]");
 	if (base == DECIMAL)
 		return (get_precision(flags, base, num));
 	if (base != OCTAL && num != 0)
