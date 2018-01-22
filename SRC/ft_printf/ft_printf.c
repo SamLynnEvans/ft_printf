@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 22:16:21 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 13:51:51 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 15:33:57 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,17 @@ int		print_chars(va_list ap, char *flags, char *c, int mod[2])
 
 	dot = (ft_strrchr(flags, '.')) ? 1 : 0;
 	uc = (ft_strrchr(flags, 'l')) ? 1 : 0;
+	if (uc && *c == 'c')
+		*c = 'C';
+	if (uc && *c == 's')
+		*c = 'S';	
 	if (*c == '%')
 		return (print_char('%', flags, mod[0]));
-	else if ((*c == 's' || *c == 'S') && dot && mod[1] == 0)
-		return (print_spaces(mod[0]));
-	else if ((*c == 'c' || *c == 'C') && dot && mod[1] == 0)
-		return (print_spaces(mod[0]));
-	else if (*c == 'S' || (*c == 's' && uc))
+	else if (*c == 'S')
 		return (ft_putstr_unicode(va_arg(ap, int *), flags, mod[0]));
-	else if (*c == 'C' || (*c == 'c' && uc))
+	else if (*c == 'C')
 		return (ft_putchar_unicode(va_arg(ap, int), flags, mod[0]));
-	else if (*c == 's' && dot && mod[1] >= 0)
+	else if (*c == 's' && dot)
 		return (dt_print_str(va_arg(ap, char *), flags, mod));
 	else if (*c == 's')
 		return (print_string(va_arg(ap, char *), flags, mod[0]));

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 13:57:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 14:12:28 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 15:20:48 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ char	bit_space_type(char *flags)
 			space_type |= ZERO;
 		i++;
 	}
-	ft_putstr("entered");
-	ft_intdebug(space_type, "st");
 	return (space_type);
 }
 

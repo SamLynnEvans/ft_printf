@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 23:59:38 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 15:11:14 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_print_colour
 }				t_print_colour;
 
 int				print_spaces(int spaces);
+int				dot_precision(int base, int num, int mod[2], char *flags);
 int				fs(char space_type, int count, int **mod);
 int				print_zeroes(int zeroes);
 int				pf_unsigned(unsigned long long n, char *fg, int mod[2], int dt);

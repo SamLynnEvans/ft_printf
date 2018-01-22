@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 22:01:39 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 14:06:52 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 15:34:36 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,9 @@ char *flags, int mod[2], int base)
 		num = shorten_number(num, size);
 	num_l = (mod[1] == 0 && num == 0) ? 0 : ft_numlen(num, base, size);
 	count = num_l;
-	ft_strdebug(flags, "flags");
 	space_type = bit_space_type(flags);
-	ft_putchar('B');
-	p = (base == DECIMAL || num != 0 || (base == OCTAL && mod[1] == 0)) ?
-	get_precision(flags, base, num) : 0;
+	p = dot_precision(base, num, mod, flags);
+	mod[1] -= (base == OCTAL) ? p : 0;
 	count += (base == DECIMAL) ? fs(space_type, count, &mod) : 0;
 	if (!(space_type & MINUS))
 		count += dot_spaces(num_l, mod, p, base);
