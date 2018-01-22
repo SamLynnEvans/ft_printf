@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 12:43:22 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 18:03:23 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 22:16:07 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_print_colour
 }				t_print_colour;
 
 int				print_spaces(int spaces);
+int				print_file(int fd, char *flags, int mod[2]);
 int				dot_precision(int base, int num, int mod[2], char *flags);
 int				fs(char space_type, int count, int **mod);
 int				print_zeroes(int zeroes);
@@ -60,12 +61,12 @@ int				pf_signed(long long n, char *flags, int mod, int base);
 int				print_colour(char *str, int *skip);
 int				dt_print_str(char *str, char *flags, int mod[2]);
 int				ft_putstr_unicode(int *str, char *flags, int mod[2]);
-int				ft_putchar_unicode(int c, char *flags, int mod);
+int				ft_putchar_unicode(int c, char *flags, int mod[2]);
 int				ft_printf(char *str, ...);
 int				print_precision(int base, int caps);
-int				print_char(char c, char *flags, int mod);
+int				print_char(char c, char *flags, int mod[2]);
 int				print_number(va_list ap, char **flags, char *c, int mod[2]);
-int				print_pointer(long long *p, char *flags, int mod);
+int				print_pointer(long long *p, char *flags, int mod[2]);
 int				print_string(char *str, char *flags, int mod[2]);
 void			ft_pf_percent(char *str, char *flags);
 void			ft_pf_string(char *str, char *flags);

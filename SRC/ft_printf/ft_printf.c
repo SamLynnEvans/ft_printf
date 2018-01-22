@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 22:16:21 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 18:35:32 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 22:15:18 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,21 @@ int		print_chars(va_list ap, char *flags, char c, int mod[2])
 	if (ft_strrchr(flags, 'l') && (c == 'c' || c == 's'))
 		c = c - 32;
 	if (c == '%')
-		return (print_char('%', flags, mod[0]));
+		return (print_char('%', flags, mod));
 	else if (c == 'S')
 		return (ft_putstr_unicode(va_arg(ap, int *), flags, mod));
 	else if (c == 'C')
-		return (ft_putchar_unicode(va_arg(ap, int), flags, mod[0]));
+		return (ft_putchar_unicode(va_arg(ap, int), flags, mod));
 	else if (c == 's')
 		return (print_string(va_arg(ap, char *), flags, mod));
 	else if (c == 'c')
-		return (print_char((char)(va_arg(ap, int)), flags, mod[0]));
+		return (print_char((char)(va_arg(ap, int)), flags, mod));
 	else if (c == 'p')
-		return (print_pointer(va_arg(ap, long long *), flags, mod[0]));
+		return (print_pointer(va_arg(ap, long long *), flags, mod));
+	else if (c == 'r')
+		return (print_file(va_arg(ap, int), flags, mod));
+	else
+		return (print_char(c, flags, mod));
 	return (0);
 }
 
@@ -95,14 +99,8 @@ int		print_variable(va_list ap, int *skip, char *str)
 		*skip = 0;
 	else if (ft_strrchr("dDuUixXoOb", *(str + *skip)))
 		count += print_number(ap, &flags, str + *skip, mod);
-	else if (ft_strrchr("cCsSp%", *(str + *skip)))
+	else
 		count += print_chars(ap, flags, *(str + *skip), mod);
-	else if (str[*skip])
-	{
-		print_spaces(mod[0] - 1);
-		*skip = *skip - 1;
-		count = (mod[0] > 0) ? mod[0] - 1 : 0;
-	}
 	free(flags);
 	return (count);
 }

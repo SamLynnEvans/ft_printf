@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 19:25:15 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 17:25:16 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 19:36:12 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,24 +76,29 @@ int	dt_print_str(char *str, char *flags, int mod[2])
 	return ((o_mod > len) ? o_mod : len);
 }
 
-int	print_pointer(long long *p, char *flags, int mod)
+int	print_pointer(long long *p, char *flags, int mod[2])
 {
 	int		num_length;
 	long	address;
 	char	space_type;
 	int		o_mod;
 
-	o_mod = mod;
+	o_mod = mod[0];
 	address = (long)p;
+	if (address == 0 && mod[1] == 0 && ft_strrchr(flags, '.'))
+	{
+		print_precision(HEXA, 0);
+		return (2);
+	}
 	num_length = ft_numlen(address, 16, sizeof(long)) + 2;
 	space_type = bit_space_type(flags);
 	if (!(space_type & MINUS))
-		while (mod-- > num_length)
+		while (mod[0]-- > num_length)
 			ft_putchar(' ');
 	print_precision(HEXA, 0);
 	ft_putbase(address, HEXA, sizeof(long) * 8);
 	if (space_type & MINUS)
-		while (mod-- > num_length)
+		while (mod[0]-- > num_length)
 			ft_putchar(' ');
 	return ((o_mod > num_length) ? o_mod : num_length);
 }
@@ -121,15 +126,15 @@ int	print_string(char *str, char *flags, int mod[2])
 	return ((mod[0] > len) ? mod[0] : len);
 }
 
-int	print_char(char c, char *flags, int mod)
+int	print_char(char c, char *flags, int mod[2])
 {
 	char	space_type;
 
 	space_type = bit_space_type(flags);
 	if (!(space_type & MINUS))
-		print_spaces(mod - 1);
+		print_spaces(mod[0] - 1);
 	ft_putchar(c);
 	if ((space_type & MINUS))
-		print_spaces(mod - 1);
-	return ((mod > 1) ? mod : 1);
+		print_spaces(mod[0] - 1);
+	return ((mod[0] > 1) ? mod[0] : 1);
 }

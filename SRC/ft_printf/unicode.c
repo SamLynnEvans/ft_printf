@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 18:57:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 16:17:59 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 19:39:33 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_putstr_unicode(int *str, char *flags, int mod[2])
 	if (str == NULL)
 		return (print_string(NULL, flags, mod));
 	if (ft_strrchr(flags, '.') && mod[1] == 0)
-		*str = '\0';
+		return (print_string("", flags, mod));		
 	space_type = bit_space_type(flags);
 	len = unicode_strlen(str);
 	if (!(space_type & MINUS) && mod[0] > len)
@@ -74,15 +74,21 @@ int	ft_putchar_uc_helper(int c, char *flags, int mod, int uc_size)
 	return ((uc_size > o_mod) ? uc_size : o_mod);
 }
 
-int	ft_putchar_unicode(int c, char *flags, int mod)
+int	ft_putchar_unicode(int c, char *flags, int mod[2])
 {
+	if (ft_strrchr(flags, '.') && mod[1] == 0)
+	{
+		if (c < 256)
+			return (print_char((char)c, flags, mod));
+		return (-4);
+	}	
 	if (c < 127 && c >= 0)
-		return (ft_putchar_uc_helper(c, flags, mod, 1));
+		return (ft_putchar_uc_helper(c, flags, mod[0], 1));
 	if (c > 127 && c < 2047)
-		return (ft_putchar_uc_helper(c, flags, mod, 2));
+		return (ft_putchar_uc_helper(c, flags, mod[0], 2));
 	if (c > 2047 && c < 65535)
-		return (ft_putchar_uc_helper(c, flags, mod, 3));
+		return (ft_putchar_uc_helper(c, flags, mod[0], 3));
 	if (c > 65536 && c < 1112064)
-		return (ft_putchar_uc_helper(c, flags, mod, 4));
+		return (ft_putchar_uc_helper(c, flags, mod[0], 4));
 	return (0);
 }
