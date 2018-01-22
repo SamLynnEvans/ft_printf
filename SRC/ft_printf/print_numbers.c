@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:38:14 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 13:36:38 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 14:14:38 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,16 @@ int			print_number(va_list ap, char **flags, char *c, int mod[2])
 {
 	char	int_size;
 	int		base;
+	int		dot;
 
+	dot = (ft_strrchr(*flags, '.')) ? 1 : 0;
 	if (*c == 'D' || *c == 'O' || *c == 'U')
-		*flags = ft_strjoin_free(*flags, "ll");
+		*flags = ft_strjoin(*flags, "ll");
 	base = get_base(c);
 	int_size = get_int_size(*flags);
 	if (*c == 'u' || *c == 'U')
-		return (pf_unsigned(va_arg(ap, unsigned long long), *flags, mod, 0));
-	if (!(ft_strrchr(*flags, '.')))
+		return (pf_unsigned(va_arg(ap, unsigned long long), *flags, mod, dot));
+	else if (!dot)
 		return (pf_signed(get_num(ap, int_size), *flags, mod[0], base));
 	else
 		return (pf_dot_signed(get_num(ap, int_size), *flags, mod, base));
