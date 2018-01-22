@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 22:01:39 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/22 17:37:00 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 18:17:27 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char *flags, int mod[2], int base)
 	if (p)
 		count += print_precision(base, p);
 	count += print_zeroes(mod[1] - num_l);
-	if (mod[1] != 0 || num != 0)
+	if (mod[1] > 0 || num != 0)
 		ft_putbase(num, base, size * 8);
 	if (space_type & MINUS)
 		count += print_spaces(mod[0] - count);
