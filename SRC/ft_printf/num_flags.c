@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:37:49 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 22:10:25 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 23:35:03 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	fs(char space_type, int count, int **mod)
 	{
 		ft_putchar(' ');
 		if (*mod[1] > count)
-			*mod[0] = *mod[0] - 1;	
+			*mod[0] = *mod[0] - 1;
 		return (1);
 	}
 	return (0);

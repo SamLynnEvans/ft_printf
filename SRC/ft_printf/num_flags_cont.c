@@ -6,13 +6,13 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 13:57:00 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 22:10:39 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 23:34:30 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_zeroes(int zeroes)
+int		print_zeroes(int zeroes)
 {
 	int	count;
 
@@ -40,8 +40,8 @@ int		print_spaces(int spaces)
 
 char	bit_space_type(char *flags)
 {
-	char space_type;
-	int	i;
+	char	space_type;
+	int		i;
 
 	i = 0;
 	space_type = 0;
@@ -58,7 +58,7 @@ char	bit_space_type(char *flags)
 	return (space_type);
 }
 
-int	get_precision(char *flags, int base, long long num)
+int		get_precision(char *flags, int base, long long num)
 {
 	if (base == DECIMAL)
 	{
@@ -75,7 +75,7 @@ int	get_precision(char *flags, int base, long long num)
 	return (1);
 }
 
-int	print_precision(int base, int precision)
+int		print_precision(int base, int precision)
 {
 	int nl_mod;
 

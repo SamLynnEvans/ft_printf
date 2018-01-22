@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:45:10 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 23:03:27 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 23:33:20 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,18 @@ void	neg_base_printer(long long num, int base, int int_size, int caps)
 
 	x = 0;
 	count[1] = 0;
-	mask_width = (base == HEXA) ? 4 : 0;
-	if (base != HEXA)
-		mask_width = (base == OCTAL) ? 3 : 1;
+	mask_width = (base == HEXA) ? 4 : 1;
+	mask_width = (base == OCTAL) ? 3 : mask_width;
 	while (x < int_size)
 	{
 		bitmask = 0;
-		count[0] = 0;
-		mask_width = (base == OCTAL && x + 3 >= int_size) ? mask_width - (3 - (int_size % 3)) : mask_width;
-		while (count[0] < mask_width)
+		count[0] = -1;
+		if (base == OCTAL && x + 3 >= int_size)
+			mask_width = mask_width - (3 - (int_size % 3));
+		while (++count[0] < mask_width)
 		{
 			if ((num & 1UL << x))
 				bitmask ^= 1UL << count[0];
-			count[0]++;
 			x++;
 		}
 		output[count[1]++] = (caps) ? g_hexa_uc[bitmask] : g_hexa[bitmask];

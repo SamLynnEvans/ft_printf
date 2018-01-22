@@ -12,13 +12,6 @@ int main(int ac, char **av)
 	int	f = -2123242;
 	int	i;
 	
-	ret1 = ft_printf("%llU\n", ULLONG_MAX);
-	ret2 = printf("%U\n", ULLONG_MAX);
-	ft_printf("my return value = %#d\n", ret1);
-	ft_printf("pf return value = %#d\n", ret2);
-ft_putchar('\n');
-	ft_printf("my return value = %#d\n", ret1);
-	ft_printf("pf return value = %#d\n", ret2);
 	ret1 =	ft_printf("%#12.23o\n", INT_MAX);
 	ret2 =	printf("%#12.23o\n", INT_MAX);
 	ft_printf("my return value = %#x\n", ret1);

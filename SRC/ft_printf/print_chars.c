@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 19:25:15 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 22:54:23 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 13:23:25 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	print_pointer(long long *p, char *flags, int mod)
 		while (mod-- > num_length + 2)
 			ft_putchar(' ');
 	print_precision(HEXA, 0);
-	ft_putbase(address, HEXA, sizeof(long) * 8, 0);
+	ft_putbase(address, HEXA, sizeof(long) * 8);
 	if (space_type & MINUS)
 		while (mod-- > num_length + 2)
 			ft_putchar(' ');

@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 22:01:39 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 22:53:33 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 13:37:25 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ static unsigned long long	ushorten_num(long long n, int size)
 	return (0);
 }
 
-static	long long	shorten_number(long long num, int int_size)
+static	long long			shorten_number(long long num, int int_size)
 {
 	if (int_size == sizeof(short))
 		return ((short)num);
 	return ((char)num);
 }
 
-int	pf_signed(long long num, char *flags, int mod, int base)
+int							pf_signed(long long num,
+char *flags, int mod, int base)
 {
 	char	space_type;
 	int		p;
@@ -51,19 +52,20 @@ int	pf_signed(long long num, char *flags, int mod, int base)
 		num_length += print_precision(base, p);
 	if (space_type & ZERO && !(space_type & MINUS))
 		num_length += print_zeroes(mod - num_length);
-	ft_putbase(num, base, int_size * 8, 0);
+	ft_putbase(num, base, int_size * 8);
 	if (space_type & MINUS)
 		num_length += print_spaces(mod - num_length);
-	return (mod > num_length) ? mod : num_length;
+	return (num_length);
 }
 
-int	pf_unsigned(unsigned long long num, char *flags, int mod[2], int dot)
+int							pf_unsigned(unsigned long long num,
+char *flags, int mod[2], int dot)
 {
 	char				space_type;
 	int					num_l;
 	int					size;
 	int					count;
-	
+
 	size = get_int_size(flags);
 	if (size != sizeof(long long))
 		num = ushorten_num(num, size);
@@ -86,7 +88,8 @@ int	pf_unsigned(unsigned long long num, char *flags, int mod[2], int dot)
 	return (count);
 }
 
-int	pf_dot_signed(long long num, char *flags, int mod[2], int base)
+int							pf_dot_signed(long long num,
+char *flags, int mod[2], int base)
 {
 	char	space_type;
 	int		num_l;
@@ -109,7 +112,7 @@ int	pf_dot_signed(long long num, char *flags, int mod[2], int base)
 		count += print_precision(base, p);
 	count += print_zeroes(mod[1] - num_l);
 	if (mod[1] != 0 || num != 0)
-		ft_putbase(num, base, size * 8, 0);
+		ft_putbase(num, base, size * 8);
 	if (space_type & MINUS)
 		count += print_spaces(mod[0] - count);
 	return (count);

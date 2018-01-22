@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 22:37:04 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/21 22:31:13 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/21 23:55:44 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	print_uc_four_byte(int c)
 	write(1, x, 4);
 }
 
-void	ft_unicode_putchar(int c)
+void		ft_unicode_putchar(int c)
 {
 	if (c < 127 && c >= 0)
 		int_putchar(c);

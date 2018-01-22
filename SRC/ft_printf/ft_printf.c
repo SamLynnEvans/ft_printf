@@ -6,7 +6,7 @@
 /*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 22:16:21 by slynn-ev          #+#    #+#             */
-/*   Updated: 2018/01/18 22:02:54 by slynn-ev         ###   ########.fr       */
+/*   Updated: 2018/01/22 13:30:42 by slynn-ev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ char	*get_flags(char *str, int *skip)
 	char	*flags;
 
 	i = 0;
-	while (FLAG_CHARACTERS && str[i])
+	while ((FC_ONE || FC_TWO || FC_THREE || NUM) && str[i])
 		i++;
 	*skip = i + 1;
 	flags = malloc(sizeof(char) * (i + 1));
 	i = 0;
-	while (FLAG_CHARACTERS && str[i])
+	while ((FC_ONE || FC_TWO || FC_THREE || NUM) && str[i])
 	{
 		flags[i] = str[i];
 		i++;
@@ -62,23 +62,22 @@ void	get_modval(va_list ap, char *flags, int *mod, int *mod2)
 
 int		print_chars(va_list ap, char *flags, char *c, int mod[2])
 {
+	int	dot;
+	int	uc;
+
+	dot = (ft_strrchr(flags, '.')) ? 1 : 0;
+	uc = (ft_strrchr(flags, 'l')) ? 1 : 0;
 	if (*c == '%')
 		return (print_char('%', flags, mod[0]));
-	else if ((*c == 's' || *c == 'S') && ft_strrchr(flags, '.') && mod[1] == 0)
-	{
-		print_spaces(mod[0]);
-		return (mod[0]);
-	}
-	else if ((*c == 'c' || *c == 'C') && ft_strrchr(flags, '.') && mod[1] == 0)
-	{
-		print_spaces(mod[0]);
-		return (1);
-	}
-	else if (*c == 'S' || (*c == 's' && ft_strrchr(flags, 'l')))
+	else if ((*c == 's' || *c == 'S') && dot && mod[1] == 0)
+		return (print_spaces(mod[0]));
+	else if ((*c == 'c' || *c == 'C') && dot && mod[1] == 0)
+		return (print_spaces(mod[0]));
+	else if (*c == 'S' || (*c == 's' && uc))
 		return (ft_putstr_unicode(va_arg(ap, int *), flags, mod[0]));
-	else if (*c == 'C' || (*c == 'c' && ft_strrchr(flags, 'l')))
+	else if (*c == 'C' || (*c == 'c' && uc))
 		return (ft_putchar_unicode(va_arg(ap, int), flags, mod[0]));
-	else if (*c == 's' && ft_strrchr(flags, '.') && mod[1] >= 0)
+	else if (*c == 's' && dot && mod[1] >= 0)
 		return (dt_print_str(va_arg(ap, char *), flags, mod));
 	else if (*c == 's')
 		return (print_string(va_arg(ap, char *), flags, mod[0]));
@@ -104,7 +103,7 @@ int		print_variable(va_list ap, int *skip, char *str)
 	if (*(str + *skip) == '\0')
 		*skip = 0;
 	else if (ft_strrchr("dDuUixXoOb", *(str + *skip)))
-		count += print_number(ap, flags, str + *skip, mod);
+		count += print_number(ap, &flags, str + *skip, mod);
 	else if (ft_strrchr("cCsSp%", *(str + *skip)))
 		count += print_chars(ap, flags, str + *skip, mod);
 	else if (str[*skip])
