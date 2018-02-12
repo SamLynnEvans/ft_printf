@@ -6,7 +6,7 @@
 #    By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/05 21:56:14 by slynn-ev          #+#    #+#              #
-#    Updated: 2018/01/22 14:39:24 by slynn-ev         ###   ########.fr        #
+#    Updated: 2018/02/03 12:53:44 by slynn-ev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,18 @@ ft_printf/num_printers.c \
 ft_printf/print_chars.c \
 ft_printf/print_numbers.c \
 ft_printf/unicode.c \
+ft_printf/fd.c \
 libft/ft_atoi.c \
 libft/ft_bzero.c \
+libft/ft_put_inta.c \
 libft/ft_intdebug.c \
 libft/ft_isalnum.c \
 libft/ft_isalpha.c \
 libft/ft_isascii.c \
 libft/ft_isdigit.c \
 libft/ft_isprint.c \
+libft/ft_atoi_base.c \
+libft/ft_abs.c \
 libft/ft_itoa.c \
 libft/ft_lstadd.c \
 libft/ft_lstaddend.c \
@@ -83,6 +87,7 @@ libft/ft_strnstr.c \
 libft/ft_strrchr.c \
 libft/ft_strsplit.c \
 libft/ft_strstr.c \
+libft/ft_strsub.c \
 libft/ft_tolower.c \
 libft/ft_toupper.c \
 libft/ft_unicode_putchar.c \
@@ -110,12 +115,15 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $@ $^
+	@ar rc $@ $^
+	@echo "###\nlibftprintf.a compiled"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(DEPS)
 	@mkdir -p $(OBJ_PATH)
 	@mkdir -p $(dir $(OBJ))
-	gcc $(FLAGS) -o $@ -c $< $(CPPFLAGS)
+	@gcc $(FLAGS) -o $@ -c $< $(CPPFLAGS)
+	@echo "#" | tr -d '\n'
+
 	
 clean:
 	rm -rf $(OBJ_PATH)
